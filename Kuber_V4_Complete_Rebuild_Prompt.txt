@@ -1,0 +1,1521 @@
+=====================================================================
+KUBER V4 — COMPLETE END-TO-END REBUILD PROMPT
+Payment Intelligence Command Center + Event-Driven Payment Simulation Engine
+Single self-contained HTML · deterministic · synthetic · offline
+=====================================================================
+
+ROLE
+----
+You are an expert Payment Architect with deep knowledge of payment rails and
+schemes: SWIFT CBPR+, ISO 20022 (pain / pacs / camt), correspondent banking,
+Fedwire Funds (ISO 20022), TCH RTP, FedNow, Nacha ACH / Same Day ACH, sanctions
+screening, nostro liquidity, investigations and reconciliation. You are also a
+senior front-end engineer who writes production-quality, dependency-free
+HTML/CSS/JavaScript.
+
+TASK
+----
+Build, from scratch, ONE self-contained HTML file named:
+
+    payment_intelligence_command_center_v4.html
+
+It contains an enterprise dark-mode "Payment Intelligence Command Center" AND a
+working, deterministic, event-driven "Payment Simulation Engine", plus an
+"Innovation Lab". Everything in this prompt is required unless marked optional.
+You may add further innovation, but you must not drop or weaken anything here.
+
+HARD CONSTRAINTS
+----------------
+1. Single file. All HTML, CSS and JavaScript inline.
+2. Zero external dependencies: no CDNs, libraries, frameworks, web fonts,
+   images, APIs, fetch/XHR, or build tools. Charts are hand-built inline SVG.
+3. Opening the file in a browser (file://) must work immediately, and it must
+   make zero network requests.
+4. No real payment execution, no external banking APIs, no claim of sending
+   SWIFT/Fed/TCH messages, no LLM calls. Kuber AI is a deterministic mock.
+5. Do not auto-run a simulation on page load.
+6. No console errors. JavaScript must pass `node --check` once extracted.
+7. No localStorage/sessionStorage. All state lives in memory.
+8. Use "use strict". Organize the code in several <script> blocks or one; shared
+   top-level const/let bindings are fine because every call happens after
+   DOMContentLoaded.
+
+THE ARCHITECTURAL STORY (reflect it in the UI)
+----------------------------------------------
+STATIC PAYMENT DASHBOARD → PAYMENT DISCOVERY → PAYMENT 360 → EVENT-DRIVEN
+PAYMENT STATE MACHINE → ISO EVENT GENERATION → SIMULATED NETWORK JOURNEY →
+KUBER OBSERVATION / OPERATIONS
+
+Canonical model: Payment = Identity + Parties + Messages + Events + Network +
+State + Financials + Exceptions + AI Activity.
+Hierarchy: Global Organization → Region → Country → Legal Entity / Bank →
+Payment Business → Payment Rail → Payment → ISO Message → Payment Event.
+
+=====================================================================
+1. PRODUCT IDENTITY & GLOBAL CHROME
+=====================================================================
+<title>: "Kuber — Payment Intelligence Command Center · Payment Simulation Engine"
+Also add a <meta name="description"> that states the data and actions are
+simulated.
+
+STICKY HEADER (position: sticky; top: 0; z-index 50; translucent navy
+rgba(6,16,28,.86) with backdrop-filter blur(14px); bottom border):
+- Logo tile, 38×38, rounded 11px, gradient #0f3350→#162a55, cyan glow. Inside
+  it an inline SVG monogram: a cyan "K" stroke, a green circle and a violet
+  tick mark.
+- Brand h1: "Kuber — Payment Intelligence Command Center"
+- Subtitle: "Domestic • Cross-Border • ISO 20022 • AI Operations"
+- Right-side pills:
+  • green "● LIVE SIMULATION". The dot blinks. Tooltip: "Synthetic simulation
+    — no real network connectivity".
+  • "Business Date: 24 Sep 2026"
+  • "Enterprise" (violet). Its text changes to "Enterprise · CBCC" or
+    "Enterprise · DOME" when that persona is chosen.
+  • "⌘ Ctrl K" button that opens the command palette.
+- Jump nav row with anchor links: Executive Radar, Operating Mode, Radar Charts,
+  Payment Discovery, Payment 360, Simulation Engine, Drilldown & Mandates,
+  Kuber Agents, Innovation Lab. html { scroll-behavior:smooth;
+  scroll-padding-top:120px }.
+- Network-pulse TICKER: a 24px strip with a horizontally scrolling marquee
+  (CSS animation, 70s linear infinite, masked fade at both edges). Items, with
+  every "●" colored green:
+  "SWIFT CBPR+ ● 2.1s p95", "Fedwire ● 8.0s p95 · ISO 20022 live since 14 Jul 2025",
+  "RTP ● 3.2s avg · $10M limit", "FedNow ● 1.8s avg · $10M network limit",
+  "ACH ● 6.0h avg · Same Day ACH windows open",
+  "CBPR+ SR2026 · unstructured addresses retire Nov 2026",
+  "Exceptions 1.24% · 10.8K cases", "Kuber · 237 AI-assisted cases · human-approved",
+  "Nacha fraud monitoring Phase 2 in force since 22 Jun 2026",
+  "Simulation only — no messages leave this browser"
+  (The list is duplicated so the loop is seamless.)
+
+FOOTER: "Kuber · Payment Intelligence Command Center · V4 Payment Simulation
+Engine — synthetic data only." and "Simulator, not a payment system: no
+payments executed, no SWIFT/Fed/TCH messages sent, no external APIs called."
+
+Global overlays:
+- #tip: custom fixed-position tooltip.
+- #toast: bottom-center toast. It auto-hides after 2.6s.
+- #pal: command palette modal.
+
+=====================================================================
+2. VISUAL SYSTEM (CSS)
+=====================================================================
+:root tokens:
+--bg:#06101c; --panel:#0c1827; --panel2:#101f31; --line:#20344a; --line2:#2a4460;
+--text:#e8f3ff; --muted:#8fa6bc; --dim:#5d7690;
+--cyan:#35d9ff; --green:#46e6a5; --amber:#ffc857; --red:#ff6685; --violet:#9b8cff; --blue:#6ea8ff;
+--r:16px; --mono: ui-monospace,"SF Mono",Menlo,Consolas,monospace.
+
+- body: 13px/1.45 Inter,"Segoe UI",system-ui,-apple-system,Roboto,sans-serif.
+  Background is --bg plus three fixed radial glows: cyan at the top-left,
+  violet at the top-right and faint green at the bottom. overflow-x hidden.
+- Card: linear-gradient(180deg,#0d1928,#091521), 1px --line border, 16px
+  radius, soft shadow, 16px padding. Card h3 is 12px uppercase, letter-spacing
+  1px, --muted, with an optional right-aligned sub-label (.r).
+- Section header (.shead): h2 17px/700 plus a small outlined cyan "tag" chip
+  (e.g. T-1, PERSONA, ANALYTICS, SEARCH, ACTIVE, V4 · EVENT-DRIVEN, DRILL,
+  AI · SIMULATED, BEYOND V4). Below it, a muted subtitle.
+- Buttons: dark (#0b1828) with a --line border and 10px radius. Hover lightens
+  the border. .on shows a cyan border. .primary uses the gradient
+  #1aa7d6→#3d6fe0 with a cyan glow (used for Start, Search, Ask Kuber and Run
+  Monte Carlo). .danger is red-tinted (Inject Failure). .sm is compact.
+  [disabled] is at 45% opacity.
+  !! Name the state-machine grid class ".smach", NOT ".sm", because ".sm" is
+  the compact-button modifier and would collide.
+- Status badges (.b pill with a leading dot):
+  g = green (COMPLETED, ACCC, SETTLED, MATCHED, CLEARED, AVAILABLE, READY, MET)
+  c = cyan (IN_PROGRESS and every in-flight state: INITIATED, ACCEPTED, SENT,
+      IN_TRANSIT, CORRESPONDENT_PROCESSING, SETTLEMENT_PENDING, ACSP, RCVD)
+  a = amber (INVESTIGATION, PDNG, SCREENING, OPEN, TIGHT, WAITING_CORRESPONDENT,
+      anything containing HOLD or MATCH, NEEDS REVIEW)
+  r = red (REJECTED, FAILED, RJCT, EXCEPTION, SHORTFALL, BLOCKED)
+  v = violet (RETURNED, RTND)
+  n = neutral (CANCELLED, —, empty)
+  bl = blue (anything else, e.g. ON_TRACK, AT_RISK, BREACHED)
+  Implement this as a function badgeCls(status) plus a badge(status) helper.
+- Tabular numbers for KPIs and amounts. Monospace for IDs, BICs, UETRs and XML.
+- Thin dark scrollbars. Honor prefers-reduced-motion by disabling animations.
+
+=====================================================================
+3. EXECUTIVE PAYMENT RADAR (KPI ROW)
+=====================================================================
+Section title "Executive Payment Radar" with tag "T-1". Subtitle "Yesterday ·
+synthetic enterprise portfolio". Right-side stats: "Portfolio: 6 rails",
+"Corridors: 41", "Legal entities: 18".
+
+Seven KPI cards. Each card has a 2px accent bar on top, a label, a large value
+(26px/750), a delta line and a 70×24 SVG sparkline in the bottom-right corner:
+1 Payment Value  $1.84T  "↑ 6.4% vs prior day"             cyan   spark = value trend
+2 Payments       8.72M   "↑ 3.1%"                          blue   spark = volume trend
+3 STP Rate       97.8%   "↑ 0.7 pp"                        green  [96.9,97.0,97.2,97.1,97.3,97.1,97.8]
+4 Success Rate   99.42%  "↑ 0.2 pp"                        green  [99.1,99.2,99.25,99.2,99.3,99.22,99.42]
+5 Exceptions     1.24%   "10.8K cases" (amber delta)        amber  [1.41,1.38,1.30,1.35,1.29,1.31,1.24]
+6 Avg Latency    2.1s    "p95 across instant & wire"        violet [2.6,2.5,2.4,2.4,2.3,2.2,2.1]
+7 AI Cases       237     "Kuber-assisted · human approved"  violet [180,192,205,199,214,226,237]
+Hovering a card shows a tooltip with Yesterday, Context, 7-day low and 7-day high.
+
+=====================================================================
+4. OPERATING MODE / PERSONA
+=====================================================================
+Segmented control with CBCC | DOME | Enterprise / All (the default is ALL).
+Mode label:
+- "CBCC — Cross-Border Correspondent Banking"
+- "DOME — Domestic Payments Operations"
+- "Enterprise / All — Cross-Border and Domestic payment universe"
+
+Three clickable persona cards (the active card has a cyan border and glow):
+- CBCC · "Cross-Border Correspondent Banking" — "Correspondent chains, nostro
+  funding, FX, sanctions screening and gpi-style tracking on SWIFT CBPR+ (ISO
+  20022 pacs.008 / pacs.009 / pacs.004)." Tags: SWIFT CBPR+, Correspondent
+  Banking, Cross-border, FX, Screening, Nostro.
+- DOME · "Domestic Payments Operations" — "US instant, batch and high-value
+  rails — RTP and FedNow (24×7, final), ACH batches and Fedwire Funds (ISO 20022
+  since Jul 2025) with intraday liquidity." Tags: RTP, ACH, FedNow, Fedwire,
+  Domestic, Liquidity.
+- ENTERPRISE · "Enterprise / All" — "Unified command view over every rail, legal
+  entity and corridor — exceptions, investigations, reconciliation and Kuber AI
+  operations." Tags: All rails, ISO 20022, Exceptions, Investigations,
+  Reconciliation, Kuber AI.
+Each card shows "Payment universe: N payments", computed live.
+
+setMode(m) must:
+- set the default columns for m
+- filter the discovery universe to that domain (the persona chip in the chips
+  row is removable and returns to ALL)
+- filter the field catalogue to fields whose domain is ALL or m
+- re-populate the simulation payment selector
+- highlight the matching rails in the rail drilldown
+- if the active payment is outside the domain, select the first matching row
+- switch the Kuber agent: CBCC → Correspondent Agent, DOME → Liquidity Agent,
+  ALL → Orchestrator
+The dashboard must stay coherent in every mode.
+
+=====================================================================
+5. RADAR CHARTS (inline SVG, custom tooltips)
+=====================================================================
+Section "Executive Payment Radar" with tag "ANALYTICS". Subtitle: "Status, rail,
+type mix and 7-day trend · hover any element for detail".
+Layout grid: 1fr 1fr 1.15fr 1.6fr.
+
+A. Payment Status donut (128px, viewBox 150; outer radius 68, inner 46, small
+   gaps between segments). Center text: "$1.78T" / "by status".
+   Completed 78% $1.22T green · In Progress 12% $412B cyan · Rejected 5% $96B red ·
+   Returned 3% $31B violet · Other 2% $18B muted.
+B. Payment Rail donut. Center text: "5 rails" / "share".
+   SWIFT CBPR+ 28% $1.02T cyan · Fedwire 10% $602B violet · ACH 32% $116B blue ·
+   RTP 18% $48B green · FedNow 12% $54B amber.
+   Legend for both donuts: swatch | name (nowrap, ellipsis) | right-aligned
+   "NN%" with the dim money value on a second line. Hovering a legend row dims
+   the other segments. Segment and legend tooltips show Share and Value.
+C. Payment Type: paired horizontal bars (cyan = Volume share, violet = Value
+   share), both scaled to the max. Data as [name, volume%, value $B]:
+   Customer Credit 31/540 · Instant 29/92 · ACH Batch 18/310 · FI Transfer 12/780 ·
+   Return 6/24 · Other 4/94. Value share = value/1840.
+   The tooltip shows volume share, value $B, value share % and the average
+   ticket (value / (8.72M × vol%)).
+D. 7-Day Trend with independent dual axes (viewBox 520×210).
+   Dates 18–24 Sep. Volume (M) 7.1, 7.4, 7.8, 7.5, 8.0, 8.3, 8.72 is a solid
+   cyan line with an area gradient, circle points and the left axis (6.5–9.0M).
+   Value ($T) 1.42, 1.48, 1.55, 1.50, 1.62, 1.71, 1.84 is a dashed green line
+   with diamond points and the right axis ($1.30–$1.95T).
+   The legend states "left axis" and "right axis". Invisible per-date hover
+   columns show a dashed guide line and a tooltip with Volume, Δ volume, Value,
+   Δ value and average ticket.
+
+TOOLTIP SYSTEM:
+- showTip(ev, html), moveTip(ev), hideTip() and bindTip(el, fn) (mouseenter,
+  mousemove, mouseleave).
+- The tooltip flips to stay inside the viewport and hides on scroll and on
+  Escape.
+- Use it for donuts, legends, type bars, trend points, KPI cards, field
+  catalogue entries, lineage nodes, graph nodes, state-machine nodes,
+  drilldown rows and mandates.
+
+=====================================================================
+6. PAYMENT DISCOVERY FABRIC
+=====================================================================
+Section "Payment Discovery Fabric" with tag "SEARCH". Subtitle:
+"Metadata-driven search across identity, ISO 20022, parties, network, state,
+risk, liquidity and AI activity".
+
+Toolbar buttons: "＋ Generate +100", "＋ Generate +1,000", "▦ Columns [count]"
+and "⇩ Export CSV".
+- The Columns button opens a popover with:
+  • presets: Default, Operations, ISO 20022, Network, Risk & Liquidity
+  • the ordered list of current columns, each with ↑ (reorder) and ✕ (remove)
+    buttons
+  The popover closes on an outside click or Escape.
+
+Layout: a 270px left field catalogue next to the main card.
+
+LEFT — FIELD CATALOGUE (metadata-driven):
+- Header "Field Catalogue" with "N fields · 20 categories", plus a "Find a
+  field…" filter input.
+- Collapsible <details> per category with an "on/total" count; Payment Identity
+  and Payment Status start open.
+- Each field row: checkbox + display name + domain chip (CBCC/DOME when not ALL)
+  + data type in mono.
+- Toggling a checkbox adds or removes the grid column; at least one column
+  always stays.
+- Hover tooltip shows description, fieldId, category, domain, dataType,
+  filterType, messageTypes, sortable/groupable and example.
+
+Each field has this metadata: fieldId, displayName, category, domain,
+messageTypes, dataType, searchable, displayable, filterType (range for amounts
+and numbers, date for date/datetime, enum for enum/status, else text), sortable,
+groupable (enum/status), description, example.
+
+The 20 categories, in order: Payment Identity, Payment Classification,
+ISO 20022, Debtor, Creditor / Beneficiary, Correspondent / Intermediary Banking,
+Amount & Currency, Dates & Timing, Payment Status, Status Reason / Exception,
+Clearing & Settlement, Screening / Risk, Customer / Business, Fees & FX,
+Liquidity, Mandates & Obligations, Investigations, Reconciliation, Operations,
+AI Agent Activity.
+
+The 64 fields, listed as fieldId (Display Name) [dataType, domain]:
+Payment Identity: paymentId (Payment ID) [id], uetr (UETR) [uuid,CBCC],
+  swiftTxnId (Swift Transaction ID) [id,CBCC], businessMsgId (Business Message ID),
+  instructionId (Instruction ID), endToEndId (End-to-End ID)
+Payment Classification: domain, rail, paymentType, scheme, purpose (Category Purpose)
+ISO 20022: messageType, mtEquivalent (MT Equivalent) [CBCC], isoVersion
+  (Message Version), addressFormat (Postal Address Format) [CBCC]
+Debtor: debtor (Debtor Name), ultimateDebtor, debtorAccount, debtorCountry
+Creditor / Beneficiary: creditor (Beneficiary), ultimateCreditor,
+  creditorAccount, creditorCountry
+Correspondent / Intermediary Banking: debtorAgent, correspondent (Correspondent
+  Bank) [CBCC], intermediary (Intermediary Bank) [CBCC], creditorAgent, bic,
+  hops (Network Hops) [number]
+Amount & Currency: amount [amount], debitCcy (Debit Currency), creditCcy (Credit
+  Currency), creditAmount [amount]
+Dates & Timing: settlementDate [date], initiatedAt [datetime], completedAt
+  [datetime], duration (Processing Duration)
+Payment Status: status (Payment Status) [status], ultimateStatus (Ultimate
+  Payment Status) [status], intermediateStatus (Intermediate Payment Status)
+  [status], gpiStatus (gpi Tracker Status) [CBCC]
+Status Reason / Exception: statusReason, exceptionType
+Clearing & Settlement: settlementMethod (Method of Payment), clearingSystem, priority
+Screening / Risk: screening (Screening State) [status], riskScore [number]
+Customer / Business: segment, paymentInitiationDept (Payment Initiation Department)
+Fees & FX: fxRate [number,CBCC], charges (Charge Bearer), feeAmount (Fees) [amount]
+Liquidity: nostro (Nostro Account), liquidityState [status]
+Mandates & Obligations: mandateRef, obligationDue
+Investigations: investigationId
+Reconciliation: reconState (Reconciliation State) [status]
+Operations: owner (Operations Owner), slaState [status]
+AI Agent Activity: aiRecommendation, aiAgent, aiConfidence [number]
+(Write a sensible ISO-aware description and example for each field, e.g.
+uetr = "Unique End-to-End Transaction Reference (UUIDv4) — gpi tracking key".)
+
+Default columns:
+- ALL:  paymentId, rail, messageType, debtor, creditor, amount, debitCcy, status,
+        intermediateStatus, settlementDate
+- CBCC: paymentId, uetr, messageType, debtor, correspondent, creditor, amount,
+        debitCcy, creditCcy, status, intermediateStatus
+- DOME: paymentId, rail, scheme, debtor, creditor, amount, status,
+        liquidityState, settlementDate
+Presets:
+- Operations: paymentId, rail, status, intermediateStatus, statusReason, owner,
+  slaState, investigationId, reconState
+- ISO 20022: paymentId, uetr, messageType, mtEquivalent, businessMsgId,
+  instructionId, endToEndId, addressFormat, status
+- Network: paymentId, debtorAgent, correspondent, intermediary, creditorAgent,
+  bic, hops, settlementMethod
+- Risk & Liquidity: paymentId, amount, debitCcy, screening, riskScore, nostro,
+  liquidityState, aiRecommendation
+
+MAIN CARD:
+- Search bar with a ⌕ icon and the placeholder "Search payment ID, UETR,
+  beneficiary, debtor, BIC, rail, status…  try: rejected swift over 1m",
+  followed by Search (primary) and Clear. Enter triggers search, and "/"
+  anywhere focuses the search box.
+- Clickable example hints (dashed chips): rejected swift over 1m ·
+  PAY-RETURN-000001 · a9f4c1e8 · status:investigation · rtp completed under 50k ·
+  bic:CITIUS33 · HSBC Treasury · pacs.009 fedwire · returned gbp · debtor:northstar
+- Six filter selects: Domain (CBCC/DOME), Rail (5 rails), Status (COMPLETED,
+  IN_PROGRESS, REJECTED, RETURNED, INVESTIGATION, FAILED, CANCELLED), Message
+  Type (pacs.008, pacs.009, pacs.004, pain.001), Currency (USD EUR GBP JPY INR SGD
+  CHF CAD; matches debit OR credit currency), Min Amount (Any, ≥10K, ≥100K,
+  ≥1M, ≥10M).
+- Active filter chips: one "label: value ×" chip for every persona, select,
+  drilldown (customer, address format) and parsed-query constraint, plus a
+  "Clear all" button. With no filters, show "No active filters — showing the full
+  payment universe".
+- Result grid:
+  • sticky header; click a header to sort (▲/▼; numeric sort for amounts)
+  • the header tooltip shows the field description
+  • rows are clickable; the selected row has a cyan left bar and gradient
+  • wrapper max-height 560px with horizontal and vertical scroll
+- Cell rendering:
+  • paymentId bold
+  • status-type fields and gpiStatus as badges
+  • amounts formatted 1,234.56 and right-aligned
+  • UETR mono, truncated to 13 chars with the full value in the title
+  • statusReason in red when present
+  • addressFormat as a colored badge (STRUCTURED green / HYBRID amber /
+    UNSTRUCTURED red)
+  • id fields mono
+  • empty values shown as a dim "—"
+- Footer stats: "Rows X of Y", "Notional", "Exceptions" (amber when > 0),
+  "Columns"; a page-size select (10/25/50/100, default 25) and ‹ Prev / Page n / N /
+  Next ›.
+
+NATURAL-LANGUAGE-LIKE QUERY PARSER parseQuery(raw) returns
+{status[], rail[], domain, msg[], ccy[], min, max, text[], keys{}}:
+- Lowercase first. Normalize "in progress"→in_progress, "cross-border"→cbcc,
+  "domestic"→dome.
+- Amount phrases: over|above|greater than|more than|>|>=|at least N[k|m|mm|b|bn|
+  thousand|million|billion] → min; under|below|less than|<|<= → max.
+- key:value tokens (quoted values allowed) with these aliases: status, rail,
+  ccy/currency, msg/type, bic, domain, country, debtor, beneficiary/creditor, id,
+  uetr, owner, reason.
+  • Rail values are matched case-insensitively against the rail list first.
+  • bic matches the debtor, creditor, correspondent or intermediary BIC.
+  • debtor matches debtor + ultimateDebtor; creditor matches creditor +
+    ultimateCreditor.
+- Bare words:
+  • status words: completed/complete/settled/success/successful → COMPLETED;
+    rejected/reject/rjct → REJECTED; returned/return/returns → RETURNED;
+    failed/failure → FAILED; investigation(s) → INVESTIGATION;
+    pending/in_progress/stuck → IN_PROGRESS; cancelled → CANCELLED
+  • rail words: swift/cbpr/cbpr+ → SWIFT CBPR+; rtp; fednow; ach;
+    fedwire/wire/wires → Fedwire
+  • cbcc/dome set the domain
+  • pacs|pain|camt.NNN set the message type
+  • ISO currency codes set the currency
+  • stopwords are dropped (show, me, all, payments, payment, with, in, the, for,
+    from, to, of, and, that, are, is, which, list, find, where, status, rail, a,
+    an, by, today, yesterday, any)
+  • everything else becomes a free-text term. All terms must be substrings of a
+    per-payment lowercase search index (every searchable field plus country),
+    cached on the payment and invalidated whenever it changes.
+- A status constraint matches either status or intermediateStatus.
+- Removing a parsed chip edits the parsed query and rewrites the search box via
+  serializeQf(). When the query is empty, state.qf becomes null.
+
+CSV EXPORT exportCurrentView():
+- Uses the current display columns (display names as the header) and ALL
+  filtered rows (not just the current page).
+- RFC-style quoting, a UTF-8 BOM and \r\n line endings.
+- Downloads via Blob and an <a download="kuber-payment-view.csv">.
+- Stores {rows, cols, csv} on exportCurrentView.last for testing and shows a
+  toast "Exported N rows × C columns → kuber-payment-view.csv".
+
+=====================================================================
+7. PAYMENT DATA MODEL, CANONICAL RECORDS & GENERATOR
+=====================================================================
+Every payment object has these properties:
+paymentId uetr swiftTxnId messageType businessMsgId instructionId endToEndId
+debtor ultimateDebtor debtorAgent creditor ultimateCreditor creditorAgent
+correspondent intermediary bic amount debitCcy creditCcy fxRate charges rail
+paymentType scheme country domain status ultimateStatus intermediateStatus
+statusReason screening settlementDate initiatedAt completedAt duration
+paymentInitiationDept owner nostro liquidityState investigationId reconState
+aiRecommendation purpose isoVersion addressFormat debtorAccount creditorAccount
+debtorCountry creditorCountry settlementMethod clearingSystem priority riskScore
+segment feeAmount mandateRef obligationDue aiAgent aiConfidence
+simState (null unless simulated) events (null → derived lifecycle)
+
+Factory mk(o) applies defaults: messageType pacs.008, USD/USD, fx 1, charges
+SHAR, domain CBCC, status COMPLETED, intermediate SETTLED, statusReason "—",
+screening CLEARED, settlementDate 2026-09-24, liquidity AVAILABLE, recon MATCHED,
+aiRecommendation "No action required", purpose SUPP, addressFormat STRUCTURED,
+settlementMethod INDA, priority NORM, riskScore 8, segment Corporate, aiAgent
+Orchestrator, aiConfidence 0.9.
+It also:
+- fills bic from the debtor agent
+- fills isoVersion from the message type: pacs.008.001.08, pacs.009.001.08,
+  pacs.004.001.09, pain.001.001.09, pacs.002.001.10
+- calls derive(p)
+
+derive(p) recomputes (and clears the search-index cache):
+- mtEquivalent: CBCC only — pacs.008→MT103, pacs.009→MT202,
+  pacs.004→MT103 RETN, pain.001→MT101; otherwise "—".
+- hops = the count of populated debtorAgent, correspondent, intermediary and
+  creditorAgent.
+- creditAmount = amount × fxRate.
+- gpiStatus (CBCC only, else "—"): COMPLETED→ACCC; REJECTED/FAILED→RJCT/<code or
+  NARR>; RETURNED→RTND/<code>; INVESTIGATION→ACSP/G003; simState or intermediate
+  SETTLEMENT_PENDING→ACSP/G002; has a correspondent or intermediary→ACSP/G000;
+  else ACSP/G001.
+- exceptionType: REJECTED/RETURNED → BENEFICIARY_ACCOUNT when the reason code is
+  AC03, else REJECTION; FAILED → NETWORK_SLA; INVESTIGATION → SCREENING_HOLD
+  when screening contains MATCH or the reason mentions screen, else
+  CORRESPONDENT_SLA; otherwise "—".
+- slaState: COMPLETED→MET; IN_PROGRESS→AT_RISK when WAITING_CORRESPONDENT, else
+  ON_TRACK; INVESTIGATION→AT_RISK; others→BREACHED.
+reasonCode(reason) = the leading [A-Z0-9_]{3,} token (e.g. "AC03").
+
+BANK DIRECTORY (name → BIC, country):
+JPMorgan Chase Bank N.A. CHASUS33 US; HSBC Bank plc MIDLGB22 GB; Citibank N.A.
+CITIUS33 US; Deutsche Bank AG DEUTDEFF DE; Bank of America N.A. BOFAUS3N US;
+Barclays Bank plc BARCGB22 GB; Wells Fargo Bank N.A. WFBIUS6S US; PNC Bank N.A.
+PNCCUS33 US; BNP Paribas SA BNPAFRPP FR; MUFG Bank Ltd BOTKJPJT JP; Standard
+Chartered Bank SCBLSGSG SG; State Bank of India SBININBB IN; UBS Switzerland AG
+UBSWCHZH CH; Royal Bank of Canada ROYCCAT2 CA.
+
+CANONICAL PAYMENTS. These eight records, in this order and with exactly these
+values; fill any unlisted fields with the mk() defaults:
+
+1) PAY-CB-000001
+   Identity: uetr a9f4c1e8-2b3d-4d77-9a12-81e7b2c3d901, swiftTxnId SWF-88419372,
+   pacs.008, BIZ-20260924-00191, INST-774991, E2E-INV-492018.
+   Parties & network: debtor Global Trading AG, ultimateDebtor Global Trading
+   Holdings AG, debtorAgent JPMorgan Chase Bank N.A., correspondent Citibank
+   N.A., intermediary Deutsche Bank AG, creditorAgent HSBC Bank plc, creditor
+   and ultimateCreditor HSBC Treasury Ltd.
+   Money: 18,420,000 USD→USD, fx 1, SHAR.
+   Classification: SWIFT CBPR+, "Cross-Border Customer Credit Transfer", CBPR+,
+   country "US → GB", CBCC.
+   State: status IN_PROGRESS, ultimate IN_PROGRESS, intermediate
+   WAITING_CORRESPONDENT, reason "—", screening CLEARED.
+   Timing: initiated 2026-09-24 09:42:11, duration 17m 42s.
+   Operations: Equity Operations / M. Patel, nostro "USD NOSTRO • 004821",
+   AVAILABLE, INV-90231, recon OPEN, AI "Escalate correspondent
+   acknowledgement".
+   Other: purpose TREA, accounts US64CHAS000118420000 / GB29MIDL40051512345678,
+   countries CH/GB, INDA, "CBPR+ / Nostro", HIGH, risk 14, Global Corporate, fee
+   65, MND-GTA-1800 due 18:00, aiAgent Correspondent Agent, confidence 0.94.
+
+2) PAY-RETURN-000001
+   Identity: uetr c1a82c9b-19c0-4b30-9a77-92d6b10071aa, SWF-88420511, pacs.004,
+   BIZ-20260924-00244, INST-775310, E2E-NSB-771204.
+   Parties & network: debtor and ultimateDebtor Northstar Bank, debtorAgent
+   HSBC Bank plc, correspondent JPMorgan Chase Bank N.A., no intermediary,
+   creditorAgent Barclays Bank plc, creditor Kestrel Logistics Ltd, no ultimate
+   creditor.
+   Money: 1,250,000 GBP→GBP.
+   Classification: SWIFT CBPR+, "Cross-Border Return", CBPR+, "US → GB", CBCC.
+   State: REJECTED / REJECTED / intermediate REJECTED, reason "AC03 — Invalid
+   Creditor Account Number", screening CLEARED.
+   Timing: initiated 11:05:37, duration 4m 51s.
+   Operations: FI Payments / R. Okafor, "GBP NOSTRO • 110937", AVAILABLE,
+   INV-90244, recon EXCEPTION, AI "Validate beneficiary account before
+   re-submit".
+   Other: INTC, GB82MIDL40051587654321 / GB33BARC20000055779911, US/GB, risk 22,
+   Financial Institutions, fee 40, MND-NSB-1500 due 15:00, aiAgent Payment
+   Investigator, 0.91.
+
+3) PAY-TIMEOUT-000001
+   Identity: uetr f4b1d8c0-7e21-4a19-91d2-5b8c3e77a210, SWF-88421877, pacs.008,
+   BIZ-20260924-00302, INST-775902, E2E-ACM-310554.
+   Parties & network: Acme Manufacturing / Acme Global Holdings, Bank of America
+   N.A. → Citibank N.A. → Deutsche Bank AG → HSBC Bank plc, Acme UK Ltd (also
+   the ultimate creditor).
+   Money: 8,200,000 USD→EUR at 0.9234, OUR.
+   State: INVESTIGATION, ultimate IN_PROGRESS, intermediate INVESTIGATION, reason
+   "Correspondent acknowledgement overdue (SLA)".
+   Timing: initiated 12:02:00, duration 1h 12m.
+   Operations: Corporate Payments / A. Chen, USD NOSTRO • 004821, INV-90251,
+   recon OPEN, AI "Chase Citibank N.A. via investigation request; hold re-send".
+   Other: address HYBRID, HIGH, risk 18, fee 55, MND-ACM-1630 due 16:30,
+   Correspondent Agent, 0.88.
+
+4) PAY-SCREEN-000001
+   Identity: uetr 8c72aa19-4fd3-4a77-b19e-61d8c2f5aa03, SWF-88422930, pacs.008,
+   BIZ-20260924-00355, INST-776118, E2E-ORN-118830.
+   Parties & network: Orion Capital / Orion Manufacturing Ltd, HSBC Bank plc →
+   JPMorgan Chase Bank N.A. → Barclays Bank plc, Orion UK Ltd.
+   Money: 3,900,000 USD→GBP at 0.7861.
+   State: COMPLETED/SETTLED, screening "RELEASED (human review)".
+   Timing: initiated 14:03:00, completed 14:06:32, duration 3m 32s.
+   Operations: Trade Finance Ops / S. Iyer, INV-90262, MATCHED, AI "Close
+   screening case; document analyst rationale".
+   Other: address UNSTRUCTURED, GDDS, risk 61, Commercial, fee 35, Risk &
+   Screening Agent.
+
+5) PAY-RTP-000001 — DOME, RTP, pacs.008, BIZ-20260924-00410, INST-RTP-58821,
+   E2E-USR-58821.
+   Parties: US Retail Corp → Bank of America N.A. → Wells Fargo Bank N.A. →
+   Supplier LLC.
+   Money: 47,500 USD.
+   Classification: "Domestic Instant Credit Transfer", scheme "TCH RTP",
+   country US.
+   State: COMPLETED, intermediate ACCC.
+   Timing: 14:04:00→14:04:08, 8s.
+   Operations: Retail Payments Hub / J. Alvarez, nostro "TCH RTP JOINT ACCT •
+   7781".
+   Other: CLRG, "RTP (prefunded joint account)", HIGH, risk 6, fee 0.45.
+
+6) PAY-ACH-000001 — DOME, ACH, pain.001, BIZ-20260924-00433, INST-ACH-22019,
+   E2E-NSS-22019.
+   Parties: Northstar Services → Wells Fargo Bank N.A. → Bank of America N.A. →
+   Vendor Services LLC.
+   Money: 220,000 USD.
+   Classification: "Domestic Batch Credit", "Nacha CCD".
+   State: COMPLETED/SETTLED.
+   Timing: 08:07:00→13:07:31, 5h 0m.
+   Operations: Corporate Payments / L. Moreau, "FED MASTER ACCT • 0021".
+   Other: CLRG, "FedACH (Same Day)", fee 0.12.
+
+7) PAY-FEDNOW-000001 — DOME, FedNow, pacs.008, BIZ-20260924-00457, INST-FN-90114,
+   E2E-MSI-90114.
+   Parties: Metro Services Inc → JPMorgan Chase Bank N.A. → PNC Bank N.A. →
+   Metro Supplier LLC.
+   Money: 18,500 USD.
+   Classification: "Domestic Instant Credit Transfer", scheme FedNow.
+   State: COMPLETED/ACCC.
+   Timing: 14:05:00→14:05:09, 9s.
+   Operations: Treasury Operations / K. Nakamura, FED MASTER ACCT • 0021.
+   Other: "FedNow (master account)", HIGH, fee 0.045.
+
+8) PAY-FEDWIRE-000001 — DOME, Fedwire, pacs.009, BIZ-20260924-00481,
+   INST-FW-33087, E2E-TSI-33087.
+   Parties: Treasury Services Inc → Bank of America N.A. → Citibank N.A. →
+   Corporate Treasury LLC.
+   Money: 7,500,000 USD.
+   Classification: "Financial Institution Transfer", "Fedwire Funds (ISO 20022)".
+   State: COMPLETED/SETTLED.
+   Timing: 14:06:00→14:06:22, 22s.
+   Operations: Treasury Operations / D. Schmidt, FED MASTER ACCT • 0021,
+   liquidity TIGHT.
+   Other: "Fedwire Funds Service", TREA, MND-HSB-1700 due 17:00.
+
+SYNTHETIC GENERATOR genPayment(r) uses a seeded PRNG (mulberry32, seed
+20260924), so output is deterministic.
+- Rail mix: SWIFT 34%, RTP 18%, FedNow 14%, ACH 22%, Fedwire 12%.
+- ID: PAY-{CB|RTP|FEDNOW|ACH|FEDWIRE}-G{000001…}.
+- Status mix: COMPLETED 84%, IN_PROGRESS 10%, REJECTED 3%, RETURNED 1.5%,
+  INVESTIGATION 1%, FAILED 0.5%. For non-ACH domestic rails, RETURNED becomes
+  REJECTED.
+- SWIFT payments:
+  • corridor from [EUR/DE/Deutsche 0.9234, GBP/GB/Barclays 0.7861, JPY/JP/MUFG
+    147.62, INR/IN/SBI 83.94, SGD/SG/StanChart 1.3412, CHF/CH/UBS 0.8811,
+    CAD/CA/RBC 1.3688, USD/GB/HSBC 1, EUR/FR/BNP 0.9234]
+  • debtor agent from JPM/BofA/Citi/HSBC; correspondent from Citi, JPM, BofA,
+    Deutsche (never the same bank as the debtor agent)
+  • intermediary 55% of the time
+  • 18% are FI transfers (pacs.009); RETURNED payments use pacs.004 with type
+    "Cross-Border Return"
+  • amount = exp(10 + r·7.2)
+  • always a UETR (UUIDv4: version nibble 4, variant 8–b)
+  • addressFormat: STRUCTURED 72%, HYBRID 18%, UNSTRUCTURED 10%
+- Domestic payments: US banks only.
+  • ACH: pain.001, "Domestic Batch Credit", amount exp(6 + 7.5r), scheme
+    Nacha CCD/PPD/CTX
+  • Fedwire: pacs.009 or pacs.008 at 50/50, amount exp(12 + 5.5r), gets a UETR
+  • RTP/FedNow: pacs.008, amount min(9.5M, exp(5.5 + 8r))
+- Status reasons for REJECTED/RETURNED come from: AC03 — Invalid Creditor
+  Account Number, AC04 — Closed Account Number, AM04 — Insufficient Funds,
+  RR04 — Regulatory Reason, BE04 — Missing Creditor Address, AG01 — Transaction
+  Forbidden.
+  FAILED → "NACK_TIMEOUT — Network SLA breached"; INVESTIGATION →
+  "Correspondent acknowledgement overdue (SLA)".
+- IN_PROGRESS intermediate status: SWIFT from SENT, IN_TRANSIT,
+  CORRESPONDENT_PROCESSING, SETTLEMENT_PENDING, WAITING_CORRESPONDENT; domestic
+  from SENT, SETTLEMENT_PENDING. Completed instant payments show ACCC; others
+  show SETTLED.
+- Screening: 40% of INVESTIGATION payments are "POTENTIAL MATCH"; about 3% of
+  all payments are "RELEASED (human review)"; the rest are CLEARED. Liquidity:
+  8% TIGHT, a small share SHORTFALL, the rest AVAILABLE.
+- Initiated between 08:00 and 17:59 on the business date. Durations are
+  rail-appropriate. completedAt is only set when the payment is COMPLETED.
+- Every payment gets businessMsgId BIZ-20260924-NNNNN, INST-, E2E-, accounts,
+  nostro, owner, department, recon (derived from status), investigationId
+  (for exceptions), aiRecommendation (derived from status), aiAgent and
+  aiConfidence 0.78–0.98.
+- Customers: Apex Energy, Mercury Trading, Nova Retail, Orion Capital, BluePeak
+  Foods, Summit Logistics, Atlas Manufacturing, Crescent Bank, Global Trading AG,
+  Acme Manufacturing, Vertex Components, Northstar Bank, HSBC Treasury Ltd.
+  Beneficiaries: Kestrel Logistics Ltd, Harbor Metals GmbH, Sakura Components
+  KK, Lion City Foods Pte, Indus Textiles Pvt Ltd, Alpine Precision AG, Maple
+  Freight Inc, Rivière Pharma SA, Supplier LLC, Vendor Services LLC, Corporate
+  Treasury LLC, Metro Supplier LLC, Vertex Components, Acme Manufacturing.
+  Departments: Treasury Operations, Equity Operations, Corporate Payments, Trade
+  Finance Ops, FI Payments, Retail Payments Hub, Securities Settlement.
+  Owners: M. Patel, A. Chen, R. Okafor, S. Iyer, L. Moreau, J. Alvarez,
+  K. Nakamura, D. Schmidt.
+- At init, append 60 generated payments. generateMorePayments(n) appends n,
+  resets to page 1, re-renders the grid, simulation selector and regulatory
+  counts, and shows a toast "Generated N synthetic payments · universe now M".
+
+=====================================================================
+8. LIFECYCLE EVENTS (single source for timeline, lineage and Kuber)
+=====================================================================
+Event object: {seq, state, prev, desc, msg, actor, reason, ts, procMs[, t, injected]}.
+
+paymentEvents(p) = p.events (set by the simulator) || baselineEvents(p). The
+baseline is derived from the payment's authoritative status and cached as
+p._bl. NEVER hard-code timeline labels.
+
+baselineEvents(p):
+- Scenario choice:
+  • by ID first: an ID containing RETURN → AC03, TIMEOUT → TIMEOUT, SCREEN →
+    SCREEN
+  • otherwise by status: REJECTED/RETURNED → AC03; FAILED → TIMEOUT;
+    INVESTIGATION → SCREEN when screening contains MATCH, else TIMEOUT;
+    COMPLETED with screening RELEASED → SCREEN; everything else → HAPPY
+- Take that scenario's steps (section 11). For HAPPY on a payment with no
+  correspondent and no intermediary (domestic), drop IN_TRANSIT and
+  CORRESPONDENT_PROCESSING.
+- Truncate to the payment's state:
+  • IN_PROGRESS + WAITING_CORRESPONDENT: cut after SENT, then append
+    {IN_TRANSIT, "In transit — awaiting correspondent acknowledgement", "—"}
+  • IN_PROGRESS with another intermediate state: cut at that state if the path
+    contains it, otherwise at SENT
+  • REJECTED: cut at REJECTED. If the reason isn't AC03, the description
+    becomes "Rejected · <reason>".
+  • RETURNED: the full AC03 path
+  • INVESTIGATION: cut at INVESTIGATION
+  • COMPLETED and FAILED: the full path
+- Timestamps: initiatedAt + the cumulative stepLatency (section 12).
+- actorFor(state):
+  • INITIATED: debtor + department
+  • ACCEPTED: debtorAgent + " · Payment Hub"
+  • SCREENING: "Sanctions / AML engine", or "Screening analyst · owner" right
+    after an INVESTIGATION
+  • SENT: debtorAgent
+  • IN_TRANSIT: the next hop (correspondent, else intermediary, else creditor
+    agent)
+  • CORRESPONDENT_PROCESSING: intermediary, else correspondent
+  • SETTLEMENT_PENDING: the clearing system (DOME) or creditorAgent
+  • COMPLETED, REJECTED, RETURNED: creditorAgent
+  • INVESTIGATION: "Operations · owner"
+  • FAILED: "Network SLA monitor"
+- reason:
+  • REJECTED/RETURNED: the payment's reason, defaulting to "AC03 — Invalid
+    Creditor Account Number"
+  • FAILED: "NACK_TIMEOUT — Network SLA breached", or "NACK_TIMEOUT — Failure
+    injected" when injected
+  • INVESTIGATION: "Potential sanctions match" when the description mentions an
+    analyst, else "Correspondent ACK overdue"
+  • otherwise "—"
+
+=====================================================================
+9. PAYMENT 360
+=====================================================================
+Section "Payment 360" with a tag showing the active payment ID. Subtitle:
+"Identity · lineage · lifecycle · ISO messages · parties — consumes the
+authoritative simulator state". Buttons:
+- "▶ Simulate this payment": loads the payment into the simulator and scrolls
+  there. If a run is already in progress, show a toast instead.
+- "✦ Ask Kuber about it": scrolls to Kuber and asks "Explain this payment".
+Layout: three columns (320px | fluid | 340px).
+
+LEFT — identity card:
+- "PAYMENT IDENTITY" label, the payment ID in large type and a status badge
+- tags: rail, domain, message type, payment type
+- the amount (26px), plus "→ credit amount @ fx" when the currencies differ
+- a colored status box (color from the journey kind) containing
+  stateLabel(p) and statusIndicator(p)
+- a key-value list: UETR ("— (not applicable)" when blank), Message (isoVersion
+  ≈ MT equivalent), Business Msg ID, Instruction ID, End-to-End ID, Swift Txn ID
+  (if any), Ultimate Status (badge), Intermediate (badge of simState ||
+  intermediateStatus), Status Reason (red when set), Corridor (country ·
+  settlementMethod), Settlement Date, Initiated, Duration, Charges
+  ("SHAR · fees X USD")
+- completion row: only when status is COMPLETED, show "Completed At". Otherwise
+  show "Final Credit: — none (<state label>)". Never print the word "Completed"
+  for a payment that isn't completed.
+
+State helpers (MANDATORY):
+- stateLabel(p): COMPLETED→"Completed", REJECTED→"Rejected",
+  RETURNED→"Returned", INVESTIGATION→"Investigation", FAILED→"Failed",
+  CANCELLED→"Cancelled", otherwise "Current State · <simState||intermediate>".
+- statusIndicator(p): COMPLETED→"ACCC · Settled"; REJECTED→"RJCT · <code|NARR>"
+  (so PAY-RETURN-000001 shows "RJCT · AC03"); RETURNED→"RTND · pacs.004 ·
+  <code>"; FAILED→"RJCT · <code|NACK_TIMEOUT>"; INVESTIGATION→"PDNG ·
+  <investigationId>"; CANCELLED→"CANC · camt.029"; otherwise "ACSP · <current
+  state>".
+
+CENTER — tabs LINEAGE | EVENTS | MESSAGES | PARTIES (active tab: cyan
+underline).
+
+LINEAGE (inline SVG, viewBox 960 wide, min-width 720 with horizontal scroll):
+- lineageNodes(p):
+  • Debtor (sub: "UD · ultimateDebtor" when it differs, else country)
+  • Debtor Agent (sub: BIC)
+  • Correspondent — ONLY if present
+  • Intermediary — ONLY if present
+  • Creditor Agent
+  • "Ultimate Creditor" (or "Creditor" when there's no ultimate creditor; sub:
+    "Cdtr · creditor" when different)
+  Every node uses the payment's actual values; names and subs are truncated
+  with an ellipsis.
+- Nodes are evenly spaced (x = 82 + i·(W−164)/(n−1)) and sized 128–150×62 with
+  rounded corners. Each shows the role (small caps), name and BIC.
+- journey(p) → {kind, target, back, state, iDA, iCA} decides the whole
+  animation (terminal state is derived, never assumed):
+  • posOf: INITIATED 0; ACCEPTED/SCREENING 1 (debtor agent); SENT 1.5 (in
+    flight); IN_TRANSIT at the correspondent (else the intermediary, else
+    between the debtor agent and creditor agent); CORRESPONDENT_PROCESSING at
+    the intermediary (else the correspondent); SETTLEMENT_PENDING at the
+    creditor agent; COMPLETED at the last node
+  • lastProgPos = the position of the last in-flight event (not COMPLETED)
+  • COMPLETED → kind ok, target = last node
+  • REJECTED → kind err, target = creditor agent (or lastProgPos if the
+    payment never left the debtor agent)
+  • RETURNED → kind ret, target = creditor agent, back = debtor agent
+  • FAILED → err at lastProgPos; INVESTIGATION → warn at lastProgPos;
+    CANCELLED → canc at lastProgPos
+  • otherwise prog at posOf(simState || last event state)
+  Kind colors: ok green, prog cyan, err red, warn amber, ret violet, canc muted.
+- Node styling:
+  • passed nodes green
+  • the target node cyan (prog), red (err), amber (warn), with a glow
+  • ret: the creditor agent is red and the nodes from the debtor agent up to
+    the creditor agent are violet
+  • pending nodes dim
+- Connectors: arrows between nodes (solid when passed, dashed otherwise).
+  Hop message labels sit BELOW the track, centered between nodes: "pain.001"
+  (or "pain.001 → ACH file"), "pacs.008"/"pacs.009"/"ACH batch", and
+  "credit · camt.054" into the final node.
+- Status tag above nodes:
+  • statusIndicator on the target node
+  • ret: "RJCT · AC03" above the creditor agent and "RTND · returned" above
+    the debtor agent
+  • last node: "Credited ✓" only for ok, otherwise "Not credited"
+- Track + packet: a thin track line under the nodes, a colored progress
+  segment up to the target, and an animated packet (circle with a halo and
+  glow) driven by requestAnimationFrame.
+  • Forward leg (ease-in-out) to the target, then a pulsing hold in the kind
+    color.
+  • For ret, the packet then travels back to the debtor agent in violet. Draw
+    a dashed violet curved return arc under the track labelled "pacs.004
+    return · funds back to <debtor agent>".
+  • Stop the RAF loop when the packet element leaves the DOM, and never start
+    two loops at once.
+- Under the SVG, a "JOURNEY STATE" bar shows a badge with stateLabel, the
+  colored statusIndicator and a sentence: "Packet delivered to …", "In flight
+  between A and B", "Packet at …" / "Packet stopped at …", or "Rejected at CA;
+  return flowing back to DA".
+- Then a note ("Nodes are populated from the selected payment; correspondent /
+  intermediary hops appear only when present. The animation's terminal state is
+  derived from the authoritative payment state.") and a "Latest Events" mini
+  table (last 5 events, newest first).
+
+EVENTS tab:
+- Header: the event count, the source ("Simulation run SIM-…" or "payment
+  record / derived lifecycle") and a LIVE badge while a run is in progress.
+- A vertical timeline with colored dots. Each item shows the description plus
+  a state badge; a meta line with 🕑 timestamp, 👤 actor, ✉ ISO message and ⏱
+  +processing time; and a mono transition line "PREV → STATE · reason: …".
+
+MESSAGES tab:
+- "MESSAGE CHAIN" chips: the unique messages from the events joined with →,
+  plus camt.054 and camt.053 when COMPLETED, or camt.052 when the payment is in
+  a terminal non-completed state. Chips are colored: RJCT red, ACCC green,
+  pacs.004 violet, otherwise blue.
+- Buttons for all 10 ISO types: pain.001, pacs.008, pacs.009, pacs.002,
+  pacs.004, camt.052, camt.053, camt.054, camt.056, camt.029. The default is
+  the payment's messageType.
+- A syntax-highlighted XML <pre> built by isoXml(type, p) with the payment's
+  real values:
+  • a head.001 AppHdr comment block (Fr/To BICFI, BizMsgIdr, MsgDefIdr, CreDt)
+  • pain.001: GrpHdr/MsgId/CtrlSum/InitgPty, PmtInf with PmtMtd TRF, SvcLvl
+    (G001 cross-border / URGP / NURG), CtgyPurp, ReqdExctnDt, Dbtr+PstlAdr,
+    DbtrAcct, DbtrAgt, ChrgBr, CdtTrfTxInf with InstrId/EndToEndId/UETR,
+    InstdAmt Ccy, CdtrAgt, Cdtr, CdtrAcct, UltmtCdtr
+  • pacs.008: SttlmMtd (+ ClrSys FDW/FDN/TCH for domestic), PmtId incl.
+    TxId/UETR, InstrPrty, IntrBkSttlmAmt/Dt, XchgRate when fx≠1, ChrgBr,
+    InstgAgt/InstdAgt, IntrmyAgt1, UltmtDbtr, Dbtr, DbtrAcct, DbtrAgt, CdtrAgt,
+    Cdtr, CdtrAcct, UltmtCdtr, Purp
+  • pacs.009: FICdtTrf with FI debtor/creditor and a COV comment
+  • pacs.002: OrgnlGrpInf, OrgnlInstrId/E2E/UETR, TxSts = STATUS_CODE[status],
+    StsRsnInf when rejected, failed or returned
+  • pacs.004: RtrId, RtrdIntrBkSttlmAmt, RtrRsnInf Cd AC03
+  • camt.052: ITBD balance, entry BOOK/PDNG
+  • camt.053: OPBD/CLBD
+  • camt.054: CRDT entry, or a "No credit booked — payment not completed"
+    comment
+  • camt.056: Assgnmt/Case with the investigation ID; CxlRsnInf FRAD when there
+    is a screening match, else AGNT
+  • camt.029: Conf CNCL/RJCR/PDCR
+  Postal addresses are structured (TwnNm/Ctry) or AdrLine for UNSTRUCTURED.
+- An MT↔MX semantic mapping table:
+  MT103→pacs.008, MT202→pacs.009, MT202 COV→pacs.009 COV, MT101→pain.001,
+  MT940→camt.053, MT900/MT910→camt.054, MT942→camt.052, MT192/n92→camt.056,
+  MT196/n96→camt.029, MT103 RETN→pacs.004, MT199 gpi→pacs.002
+- Disclaimer: the samples are illustrative, the mapping is semantic only, and
+  no XPaths are asserted.
+
+PARTIES tab — party and bank graph (SVG, 940×250):
+- Customer tier on top: Ultimate Debtor (only if different, violet) —"on
+  behalf of"→ Debtor … Creditor —"for benefit of"→ Ultimate Creditor, with a
+  dotted "underlying credit transfer · amount ccy" edge between Debtor and
+  Creditor.
+- Bank tier below: Debtor Agent → Correspondent ("nostro / vostro") →
+  Intermediary ("correspondent link") → Creditor Agent ("settlement"). Only
+  populated banks are drawn.
+- Vertical "account holder · CCY" edges connect the debtor and creditor to
+  their agents.
+- Node tooltips.
+- Below the graph, a table: Role | Name | BIC | Country | Account/Nostro (only
+  populated roles).
+
+RIGHT — lifecycle column:
+- "Lifecycle" stepper built from the events:
+  • past rows done (green); earlier REJECTED/FAILED rows err; earlier
+    INVESTIGATION rows warn
+  • the last row is styled by status: done / err / ret / warn / cur (cyan
+    glow)
+  • IN_PROGRESS: add dim "expected" rows for the remaining happy-path states
+    EXCLUDING COMPLETED, then "Awaiting final confirmation (ACCC) · pending"
+  • terminal non-completed payments: "Path terminates here — <label>. No
+    completion event exists for this payment."
+- "Hop Tracker" (gpi-style for CBCC, showing gpiStatus): a card for each bank
+  hop with role, name and status. Statuses: ✓ settled (ok), ✓ passed,
+  ● state (current), incoming, or statusIndicator in the kind color; ret shows
+  RJCT at the creditor agent and "RTND received" at the debtor agent.
+- "Operations" key-value list: Owner · department, SLA badge, Screening badge +
+  risk, Liquidity badge + nostro, Investigation, Reconciliation badge, Kuber
+  recommendation (violet).
+- "Readiness Checks" (✓ / ! / ✕ icons):
+  • CBPR+ SR2026 postal address: domestic → n/a; STRUCTURED → compliant;
+    HYBRID → accepted with town + country structured; UNSTRUCTURED → rejected
+    after the Nov 2026 cut-over
+  • Beneficiary account pre-validation: AC03 → ✕ with "pre-validation (e.g.
+    Swift Payment Pre-validation) would have caught this"; CBCC → !
+    recommended; domestic → ✓
+  • Sanctions / AML screening
+  • Intraday liquidity
+
+selectPayment(id, {quiet}):
+- sets the active payment
+- highlights the grid row
+- renders Payment 360 and the Kuber evidence
+- when the payment changed and no simulation is running: makes sure the
+  payment is in the simulation selector, selects it and loads it into the
+  simulator. When a run is in progress, show a hint saying so instead.
+- unless quiet, posts a Kuber system line "Context switched to ID · label ·
+  indicator".
+
+=====================================================================
+10. STATE MACHINE (authoritative)
+=====================================================================
+Happy path: INITIATED → ACCEPTED → SCREENING → SENT → IN_TRANSIT →
+CORRESPONDENT_PROCESSING → SETTLEMENT_PENDING → COMPLETED.
+Alternate states: REJECTED, RETURNED, CANCELLED, FAILED, INVESTIGATION.
+Exception states (these count as exceptions): REJECTED, FAILED, INVESTIGATION,
+RETURNED, CANCELLED.
+STATUS_CODE: COMPLETED ACCC; ACCEPTED, IN_TRANSIT, CORRESPONDENT_PROCESSING,
+SETTLEMENT_PENDING, SENT ACSP; REJECTED, FAILED RJCT; RETURNED RTND;
+INVESTIGATION, SCREENING PDNG; INITIATED RCVD; CANCELLED CANC.
+Payment status derived from a simulator state: COMPLETED, REJECTED, RETURNED,
+FAILED, INVESTIGATION and CANCELLED map to themselves; every other state maps
+to IN_PROGRESS.
+
+=====================================================================
+11. SCENARIOS (implement EXACTLY; state · description · message)
+=====================================================================
+HAPPY "Happy Path" — "Validates → screens → creates pacs.008 → routes through
+correspondent/intermediary → settles → emits pacs.002 ACCC."
+ INITIATED · Payment instruction accepted · pain.001
+ ACCEPTED · Structural and business validation passed · pain.001
+ SCREENING · Sanctions / AML screening cleared · —
+ SENT · pacs.008 created and sent to originating network · pacs.008
+ IN_TRANSIT · Correspondent acknowledged receipt · pacs.002 ACSP
+ CORRESPONDENT_PROCESSING · Intermediary processing completed · pacs.002 ACSP
+ SETTLEMENT_PENDING · Settlement instruction accepted · pacs.002 ACSP
+ COMPLETED · Final acceptance / settlement confirmed · pacs.002 ACCC
+
+TIMEOUT "Correspondent Timeout" — "The payment reaches the correspondent but
+receives no acknowledgement. The simulator opens an investigation rather than
+falsely marking the payment complete."
+ INITIATED · Payment instruction accepted · pain.001
+ ACCEPTED · Validation passed · pain.001
+ SCREENING · Screening cleared · —
+ SENT · pacs.008 sent to correspondent · pacs.008
+ IN_TRANSIT · No correspondent acknowledgement within SLA · —
+ INVESTIGATION · Investigation opened; correspondent case prepared · camt.056
+ FAILED · Network SLA breached; payment remains unresolved · pacs.002 RJCT
+
+AC03 "AC03 Return" — "Beneficiary account validation fails. The original
+credit transfer is rejected and a return path is created using pacs.004."
+ INITIATED · Payment instruction accepted · pain.001
+ ACCEPTED · Validation passed · pain.001
+ SCREENING · Screening cleared · —
+ SENT · pacs.008 sent to beneficiary bank · pacs.008
+ IN_TRANSIT · Creditor account validation requested · pacs.002 ACSP
+ REJECTED · Creditor account invalid · AC03 · pacs.002 RJCT
+ RETURNED · Return instruction generated · pacs.004
+
+SCREEN "Screening Hold" — "Potential screening match creates a hold. Human
+review is required before release; the simulator then continues with a cleared
+payment."
+ INITIATED · Payment instruction accepted · pain.001
+ ACCEPTED · Validation passed · pain.001
+ SCREENING · Potential screening match detected · —
+ INVESTIGATION · Payment placed on hold for analyst review · camt.056
+ SCREENING · Human review cleared the payment · —
+ SENT · pacs.008 released to network · pacs.008
+ SETTLEMENT_PENDING · Settlement pending · pacs.002 ACSP
+ COMPLETED · Final acceptance / settlement confirmed · pacs.002 ACCC
+
+Expected counts:
+- Happy: 8 events, 7 ISO messages, 0 exceptions
+- Timeout: 7 events, 5 ISO messages, 2 exceptions
+- AC03: 7 events, 6 ISO messages, 2 exceptions
+- Screen: 8 events, 6 ISO messages, 1 exception
+
+=====================================================================
+12. PAYMENT SIMULATION ENGINE
+=====================================================================
+Section "Payment Simulation Engine" with tag "V4 · EVENT-DRIVEN". Subtitle
+"Deterministic state machine · ISO 20022 event generation · simulated network
+journey — nothing leaves this browser". Right side: "Mode X", "Run SIM-…".
+Two columns (1.25fr | 1fr).
+
+LEFT CARD "Control Plane" (header right shows the scenario name):
+- Scenario select (4 scenarios).
+- Payment select with optgroups: "Canonical payments" (canonical records in
+  the current persona) and "Synthetic / selected" (the sim payment and active
+  payment if not already listed, then the last 40 generated). Option label:
+  "ID · rail · status". Labels refresh as the status changes.
+- Speed segmented control: 1x 2x 5x 10x = 1700, 850, 340, 170 ms per step.
+  Changing it mid-run affects the next step.
+- Buttons: ▶ Start (primary; disabled while running), ❚❚ Pause (disabled when
+  not running), ↺ Reset, ⚡ Inject Failure (danger). Next to them, a hint area
+  that shows e.g. "Suggested for PAY-RETURN-000001: AC03 Return" as a link
+  that switches the scenario. The suggestion comes from scenarioForPayment and
+  is only shown when it differs from the current scenario.
+- Outcome banner (hidden until needed):
+  • ok: "✓ COMPLETED · pacs.002 ACCC · settlement confirmed"
+  • bad: "✕ FAILED · network SLA breached · payment unresolved (not completed)"
+  • ret: "↩ RETURNED · REJECTED (AC03) → pacs.004 return generated (not
+    completed)"
+  • injected: "⚡ FAILURE INJECTED · payment FAILED · pacs.002 RJCT emitted"
+  • warn (Inject pressed while idle): "START SIMULATION FIRST"
+- Seven stat tiles in a 4-column grid (2 columns on mobile): Mode, Outcome,
+  Current State, Elapsed, Events, ISO Msgs, Exceptions. The Outcome and State
+  values are colored by meaning.
+  Default values: READY, NO RUN, READY, "0 ms", 0, "0 ISO messages",
+  "0 exceptions".
+- "State Machine" with "step k / N" on the right. The nodes are the scenario
+  steps (plus an extra "FAILED ⚡" node when a failure was injected), in a grid
+  whose column count comes from a CSS variable --n. Each node shows its index,
+  state (underscores → spaces) and message.
+  • Pending nodes are dark. The active node is cyan with a glow and a pulsing
+    ring. Completed nodes are green; a final COMPLETED node is green too.
+  • Error states are red, INVESTIGATION amber and RETURNED violet — both when
+    current and once passed.
+  • After an injection, the remaining unexecuted nodes are struck through at
+    35% opacity.
+  • Node tooltips show step, description, ISO message and ISO status.
+- A progress bar under the nodes: idx/steps, or 100% when finished or
+  injected. Its gradient is cyan→green, cyan→red (failed, rejected or
+  injected) or cyan→violet (returned).
+- "Simulated Network Journey" — a message-sequence swimlane SVG:
+  • lanes = lineageNodes of the sim payment, with role and name headers and
+    dashed lifelines
+  • one row per event, with the elapsed time and a colored state label on the
+    left
+  • arrows use per-color arrowhead markers (do not rely on context-stroke);
+    labels sit on a background pill
+  Row mapping:
+  INITIATED: Debtor→Debtor Agent (msg). ACCEPTED: self-box on the debtor agent
+  "validated · pain.001". SCREENING: self-box "⚠ potential match" / "✓ human
+  release" / "✓ screened". SENT: DA→next hop (msg). IN_TRANSIT: next→DA
+  "pacs.002 ACSP", or a self-box "⌛ no ACK within SLA" when msg is "—".
+  CORRESPONDENT_PROCESSING: Corr→Int "fwd · msg" (or →DA). SETTLEMENT_PENDING:
+  CA→DA. COMPLETED: CA→DA "pacs.002 ACCC" plus a "credited ✓" self-box on the
+  final party. REJECTED: CA→DA "pacs.002 RJCT AC03" (red). RETURNED: CA→DA
+  "pacs.004 return" (dashed violet). INVESTIGATION: a self-box "HOLD · camt.056"
+  after SCREENING, else DA→next "camt.056 case" (amber). FAILED: injected → a
+  self-box "⚡ injected · pacs.002 RJCT" at the stall point; otherwise next→DA
+  "pacs.002 RJCT NACK" (dashed red).
+  Auto-scroll to the latest row. Before any events, show a placeholder line.
+
+RIGHT COLUMN cards:
+- "Event Stream" (newest first): a scrolling table with Time (elapsed seconds
+  to one decimal, e.g. 0.0s, 1.7s), State/Event (badge) and Detail ("desc ·
+  msg" with the msg in cyan mono and the reason in red underneath). New rows
+  flash. Empty state: "No events. Choose a scenario and press Start."
+- "Simulation Metrics": Latency (simulated network time), Hops (populated
+  DA/Corr/Int/CA) and ISO Messages, then "SCENARIO" with the description and
+  "SIMULATION PATH" as colored STATE → STATE → … (with "⇢ FAILED (injected)"
+  appended after an injection).
+- "ISO Event Payload" (header right: "EventId · PaymentStatus"): a
+  syntax-highlighted JSON <pre> that updates on EVERY event. When READY it
+  shows {status:"READY", PaymentId, Scenario, note}.
+- "Run History": a session table with Run, Scenario, Payment, Outcome badge
+  (with "⚡ injected" when applicable) and Events, newest first, 12 rows max.
+
+ENGINE OBJECT:
+sim = {scenario, steps, idx, running, timer, uiTimer, startedAt, elapsedBefore,
+events[], injected, paymentId, speed, finished, runId, runSeq, latency, iso, exc,
+outcome, mode, state, snapshot, history[], lastPayload}.
+elapsedMs() = elapsedBefore + (running ? now − startedAt : 0). Pausing
+preserves elapsed time. Display: <1000 as "N ms", else "N.Ns". A 100ms UI
+interval updates Elapsed while running.
+
+Simulated latency: stepLatency(p, state, i, prev) = base × (0.7 + (hash(id|i|state)
+mod 600)/1000). Base values in ms per rail class:
+- XB (SWIFT): INITIATED 0, ACCEPTED 800, SCREENING 2200, SENT 1400, IN_TRANSIT
+  42000, CORRESPONDENT_PROCESSING 65000, SETTLEMENT_PENDING 38000, COMPLETED
+  12000, REJECTED 20000, RETURNED 45000, INVESTIGATION 900000, FAILED 1800000,
+  CANCELLED 60000.
+- INSTANT (RTP/FedNow): 0, 120, 350, 180, 400, 300, 600, 450, REJ 500, RET 900,
+  INV 300000, FAIL 20000, CANC 2000.
+- WIRE (Fedwire): 0, 400, 1500, 900, 1800, 2000, 3500, 2500, REJ 3000, RET 9000,
+  INV 600000, FAIL 120000, CANC 5000.
+- BATCH (ACH): 0, 60000, 120000, 600000, 1800000, 900000, 7200000, 3600000,
+  REJ 3600000, RET 7200000, INV 3600000, FAIL 7200000, CANC 600000.
+A SCREENING that directly follows an INVESTIGATION uses 600000 (human review).
+The Latency metric is the running sum, shown as ms, s, "Xm Ys" or h.
+
+FUNCTIONS (keep these names and responsibilities):
+- simPaymentOptions() / populateSimPayments() / ensureSimOption(id)
+- loadSimulationPayment(): does nothing while running. If the previous payment
+  had a partial (paused, unfinished) run, restore its snapshot. Then clear the
+  engine, set the new payment, re-render and show the suggestion. A finished
+  run's end state stays on its payment.
+- changeScenario(): restore only an unfinished partial run, clear the engine,
+  set the steps and re-render.
+- renderScenarioMeta(), renderStateMachine(), updateSimMetrics(),
+  renderSimLog(), drawSeq(), renderRunHistory(), renderSimAll()
+- startSimulation():
+  • if already running, do nothing
+  • if finished, run resetSimulation() first
+  • on a fresh start: snapshot the payment (status, ultimateStatus,
+    intermediateStatus, statusReason, screening, completedAt, duration,
+    messageType, investigationId, reconState, aiRecommendation, aiAgent,
+    events, simState), increment runSeq, set runId "SIM-20260925-NNNN", clear
+    p.events and p._bl, then execute the first tick immediately (so the first
+    event lands at 0.0s)
+  • when resuming from a pause, schedule the next tick after the speed delay
+  • set mode RUNNING and outcome RUNNING
+- tickSimulation(): append steps[idx], increment idx, then finish or schedule
+  the next tick.
+- appendSimEvent(step, injected):
+  • compute latency and build the event (ts = initiatedAt + cumulative latency,
+    t = elapsed)
+  • push it; increment iso when msg ≠ "—" and exc when the state is an
+    exception state
+  • set sim.state and call applySimState(p, ev)
+  • build the payload and re-render the log, state machine, meta, metrics and
+    sequence diagram, plus Payment 360 and evidence if this is the active
+    payment, plus the grid
+- applySimState(p, ev) — the simulator is authoritative:
+  • simState = state; status = the derived payment status; intermediateStatus
+    = state (SETTLED for COMPLETED)
+  • ultimateStatus = the terminal state or IN_PROGRESS
+  • statusReason set only for REJECTED/RETURNED/FAILED/INVESTIGATION, otherwise
+    "—" (so AC03 appears on the reject path)
+  • screening: "POTENTIAL MATCH" when the description contains "Potential",
+    "CLEARED (human review)" when it contains "Human", "HOLD — POTENTIAL MATCH"
+    on an analyst INVESTIGATION, otherwise CLEARED
+  • completedAt only on COMPLETED; duration = the latency sum
+  • messageType pacs.004 on RETURNED (and restored to the original non-return
+    type at INITIATED)
+  • investigationId generated ("INV-93000+runSeq") on INVESTIGATION if missing
+  • reconState MATCHED / EXCEPTION / OPEN
+  • aiRecommendation per state: "Monitor — within SLA"; "Route alert to
+    screening analyst"; "Monitor — awaiting correspondent ACK"; "Escalate
+    correspondent acknowledgement" (IN_TRANSIT with no ACK); "Pre-stage camt.054
+    reconciliation"; "Close case; reconcile camt.054"; "Validate beneficiary
+    account before re-submit"; "Credit pacs.004 return to debtor and notify
+    client"; "Analyst review of screening alert — human decision required" /
+    "Chase correspondent via investigation request"; FAILED → "Confirm failure
+    root cause; verify no duplicate before re-send" (injected) or "Open network
+    incident; hold re-send pending camt.029"
+  • aiAgent by state
+  • p.events = sim.events; then derive(p) and refresh the option label
+- pauseSimulation(): clear the timers, keep elapsed, mode and outcome PAUSED.
+- resetSimulation(): restore the snapshot (the payment returns to its record
+  state), clear the engine (READY, NO RUN, 0 ms, 0 ISO messages, 0 exceptions,
+  no events, default payload, runId "—"), hide the banner and re-render
+  everything.
+- finishSimulation():
+  • stop the timers, set finished and mode FINISHED
+  • outcome = "FAILURE INJECTED" when injected, else the final state
+  • show the banner, update metrics, state machine and meta
+  • push the run history entry
+  • post a Kuber system line: "Simulation SIM-… finished on ID: OUTCOME · N
+    events · I ISO messages · E exceptions. Kuber observed the run; no external
+    action was executed."
+  • re-render Payment 360 and evidence
+- injectFailure():
+  • when not running: show "START SIMULATION FIRST" (banner and hint)
+  • otherwise: stop the timer, set injected = true, append {FAILED, "Failure
+    injected — processing aborted by chaos control", "pacs.002 RJCT"} (this
+    increments exc and regenerates the payload), then finish (outcome FAILURE
+    INJECTED, red visuals, payment FAILED)
+- buildIsoEvent(ev, p) → JSON with keys in THIS order:
+  BusinessMessageId, UETR (null if none), PaymentId, MessageType (the msg base
+  type, or "— (internal event, no ISO message)"), PaymentStatus
+  (STATUS_CODE[state]), StatusReason (REJECTED→"AC03", FAILED→"NACK_TIMEOUT",
+  else "—"), Event, Description, DebtorAgent "Name (BIC)", Correspondent,
+  Intermediary, CreditorAgent (or "—"), Amount (number), Currency.
+  Then the extras: EventId "RUN-E07", Sequence, SimulationRunId, Scenario,
+  Timestamp ISO Z, PreviousState, Actor, TrackerStatus (gpiStatus),
+  SimulatedLatencyMs, FailureInjected, ExternalActionExecuted:false,
+  ReturnReason "AC03" on RETURNED, and TxSts (ACSP/ACCC/RJCT) when present in
+  the message.
+
+MANDATORY STATE CONSISTENCY RULE:
+Payment 360 (identity box, lineage, journey bar, events, lifecycle, hop
+tracker), the grid badge, the Kuber evidence, the event stream, the state
+machine, the banner and the JSON payload must always agree. A payment that is
+REJECTED, RETURNED, INVESTIGATION, FAILED or IN_PROGRESS must never display the
+text "Completed" or "COMPLETED" anywhere in the Payment 360 section, and its
+animation must never end at "Completed".
+
+=====================================================================
+13. DRILLDOWN & MANDATES
+=====================================================================
+Section "Customer, Rail & Obligation Drilldown" with tag "DRILL". Three cards.
+- Top Customers (value bar + STP badge; green ≥99, cyan ≥98.5, amber
+  otherwise). Clicking a customer toggles a customer filter on
+  debtor/ultimateDebtor/creditor/ultimateCreditor and scrolls to discovery:
+  Global Trading AG $210B 99.1% · Acme Manufacturing $146B 98.7% · HSBC Treasury
+  $121B 99.8% · Vertex Components $88B 97.9% · Northstar Bank $73B 98.2%
+- Rails (color swatch, value, latency in mono, bar scaled to $1.02T). Clicking
+  toggles the rail filter; "Other" shows a toast because it isn't modelled.
+  Rows are highlighted by persona:
+  SWIFT CBPR+ $1.02T 2.1s p95 · Fedwire $602B 8.0s p95 · ACH $116B 6.0h avg ·
+  RTP $48B 3.2s avg · FedNow $54B 1.8s avg · Other $4B —
+- Mandates / Obligations, each with a numbered chip, "due HH:MM ET · linked
+  PAY-…", a coverage meter and a Kuber readiness badge:
+  1 Global Trading AG · USD liquidity top-up · due 18:00 · Ready · 100% · PAY-CB-000001
+  2 Acme Manufacturing · supplier batch · 16:30 · Needs review · 82% · PAY-TIMEOUT-000001
+  3 HSBC Treasury · nostro funding · 17:00 · Ready · 100% · PAY-FEDWIRE-000001
+  4 Northstar Bank · return investigation · 15:00 · Needs review · 40% · PAY-RETURN-000001
+  Clicking a mandate selects its linked payment, posts a system line and asks
+  Kuber about mandate readiness.
+
+=====================================================================
+14. KUBER AGENTIC OPERATIONS (deterministic mock)
+=====================================================================
+Section "Kuber Agentic Operations" with tag "AI · SIMULATED". Subtitle:
+"Deterministic multi-agent observation over the active payment —
+evidence-bound, human-approved". Right side: "Active payment X", "Agents 7".
+Three columns (250px | fluid | 330px).
+
+Agents (icon, color, status line):
+- Orchestrator ◎ cyan — "Routes intents · composes evidence" — coordinating 7 agents
+- Payment Investigator ⌕ amber — "Exceptions · returns · root cause" — 14 open cases
+- Correspondent Agent ⇄ blue — "Correspondent chain · gpi tracking" — watching 31 chains
+- Risk & Screening Agent ⛨ red — "Sanctions · AML · fraud signals" — 3 alerts in review
+- Liquidity Agent ≋ green — "Nostro · intraday liquidity" — 12 accounts
+- Reconciliation Agent ⚖ violet — "camt.053 / camt.054 matching" — 98.9% auto-matched
+- ISO Interpreter </> cyan — "ISO 20022 semantics · MT mapping" — 10 message families
+
+Center:
+- A header with the active agent name and role.
+- A conversation pane (430px, capped at 60 messages): user bubbles on the
+  right with a cyan gradient; agent bubbles on the left with a colored agent
+  label; system lines centered in dashed amber.
+- Per-agent quick-question chips:
+  • orchestrator: Explain this payment / Why is it not complete? / What should
+    I do next?
+  • investigator: Root cause? / Why rejected? / Draft investigation
+  • correspondent: Where is the payment? / Show correspondent chain / gpi status?
+  • risk: Screening & risk? / Any sanctions exposure? / Fraud signals?
+  • liquidity: Liquidity impact? / Nostro position? / Mandate readiness?
+  • recon: Reconciliation state? / Which camt matches? / Open breaks?
+  • iso: Show ISO chain / MT103 mapping? / SR2026 address readiness
+- An "Ask Kuber" input plus a primary button (Enter submits).
+- Replies first show "Correlating evidence across identity, ISO, lineage,
+  state, risk, liquidity and ownership…" and are replaced after ~380ms.
+
+Right:
+- Evidence card with two gauges: CONFIDENCE and EVIDENCE completeness %.
+- Seven evidence rows (violet key | value | ✓/✕):
+  • IDENTITY: payment ID + UETR (or "domestic (no UETR)"); present if the ID
+    exists and there is a UETR or the payment is DOME
+  • ISO: message type · InstrId · E2E
+  • LINEAGE: DA → Corr → Int → CA (≥2 banks)
+  • STATE: status · current state · reason
+  • RISK: screening · score
+  • LIQUIDITY: state · nostro
+  • OWNER: owner · department
+- confidence = 0.73 + 0.03 × present, −0.06 if FAILED, −0.05 if screening
+  contains MATCH, clamped to 0.5–0.99. PAY-CB-000001 must show 0.94 and 100%.
+- "Proposed Actions", each with "✓ Approve (simulated)" and "✕ Decline".
+  Approving marks the action "Approved (simulated) · not executed" and posts
+  "Human approval recorded for "X" on ID. No external action was executed —
+  this is a simulation."
+  Actions by status:
+  • COMPLETED: confirm the camt.054 match and close; send a completion advice
+  • REJECTED: validate the beneficiary account (pre-validation); prepare the
+    pacs.004 return / repair; notify the relationship manager
+  • RETURNED: credit the return to the debtor; close the investigation with
+    camt.029
+  • INVESTIGATION (screening): assign to an L2 analyst (four-eyes); keep funds
+    on hold
+  • INVESTIGATION (other): draft an investigation request to the correspondent;
+    block duplicate re-sends
+  • FAILED: open a network incident; verify no duplicate before re-sending
+  • otherwise: escalate the acknowledgement with the next hop (when AT_RISK or
+    WAITING_CORRESPONDENT) or continue monitoring; reserve liquidity on the
+    nostro
+- A permanent amber boundary box: "⚠ No external action was executed. Human
+  approval remains required."
+
+Intent routing answerFor(q, p, agent). Keyword regexes are checked in this
+order: mandate; risk (screen|sanction|aml|risk|fraud|alert); liquidity
+(liquid|nostro|fund|position); address (address|structured|sr2026|november);
+iso (iso|message|pacs|camt|xml|mt\d|mapping); recon (recon|match|break);
+owner (owner|who|team|department); reject (reject|return|ac03|repair|root
+cause); lineage (where|chain|correspondent|route|hop|gpi|lineage|path);
+action (next|do|action|recommend|draft|should); otherwise summary.
+When the Orchestrator is active, route to the specialist (risk→Risk,
+liquidity/mandate→Liquidity, iso/address→ISO Interpreter, recon→Recon,
+reject→Investigator, lineage→Correspondent) and show "Orchestrator → routed to
+X". Every answer:
+- is built only from the payment's fields
+- lists the evidence chips it used
+- ends with "Confidence: 0.NN · Action: human approval required." and the
+  boundary line "No external action was executed. Human approval remains
+  required."
+
+The summary answer semanticSummary(p) is state-aware:
+- IN_PROGRESS: "Payment is progressing through the correspondent chain (or 'on
+  <rail>'). Current intermediate status is X."
+- REJECTED: "rejected by CA with <reason>. It is not complete and must not be
+  reported as settled."
+- RETURNED, INVESTIGATION and FAILED: explicit wording that the payment is not
+  complete
+- COMPLETED: "completed end-to-end … ACCC"
+Every variant then adds: "Evidence includes the UETR, pacs.008 instruction,
+correspondent lineage (…), current intermediate status, screening result (…),
+liquidity state (…) and operations owner (…)."
+At init, the Orchestrator greets with the summary for PAY-CB-000001,
+"Confidence: 0.94 · Action: human approval required." and the boundary line.
+
+=====================================================================
+15. INNOVATION LAB (tag "BEYOND V4")
+=====================================================================
+Three cards.
+
+A. Smart Rail Router
+Inputs: Amount USD (default 2,500,000), Destination (Domestic US / Cross-border),
+Urgency (Instant 24×7 / Same day / Next day · lowest cost) and Timing (Business
+hours / Evening-weekend). The result updates live.
+Options and eligibility:
+- SWIFT CBPR+: cross-border only (UETR/gpi tracked, pre-validate, structured
+  address from Nov 2026)
+- RTP: domestic, ≤ $10M, 24×7×365, final
+- FedNow: domestic, ≤ $10M network limit (raised Nov 2025; participant limits
+  may be lower)
+- Fedwire: domestic, not evenings or weekends, no cap, RTGS, ISO 20022 since
+  Jul 2025
+- Same Day ACH: domestic, ≤ $1M, business hours, not for Instant
+- ACH (next day): domestic, only when urgency is Next day
+Scoring: speed (5,5,4,3,2,1) and cost-efficiency (1,4,4,2,5,5), weighted
+Instant [3,1] with +3 for speed 5, Same day [2,2], Next [1,3]. Ineligible
+options score −1.
+Render the sorted option cards with "Recommended" (green border), "Eligible" or
+"Ineligible" (dimmed), the reason and ●○ dots for speed and cost. Add a
+footnote that the limits are illustrative network-level limits.
+Example: $25M domestic instant → Fedwire is recommended.
+
+B. Regulatory & Scheme Horizon (as of 24 Sep 2026)
+- 14 Jul 2025 — Fedwire Funds Service migrated to ISO 20022 (single-day
+  cut-over) — LIVE
+- Nov 2025 — CBPR+ MT/MX coexistence ended for cross-border payment
+  instructions (MT103/MT202 → pacs.008/pacs.009) — LIVE
+- Nov 2025 — FedNow network transaction limit raised to $10M, matching RTP —
+  LIVE
+- 20 Mar 2026 — Nacha risk-based fraud monitoring Phase 1 (largest ODFIs &
+  originators); PAYROLL / PURCHASE descriptors — LIVE
+- 22 Jun 2026 — Nacha fraud monitoring Phase 2 (all remaining participants) —
+  LIVE
+- Nov 2026 — CBPR+ SR2026: fully unstructured postal addresses no longer
+  accepted; structured or hybrid required — "~7 WEEKS" (amber). This row also
+  shows live counts: "N cross-border payments unstructured · M hybrid of T",
+  plus a "filter at-risk payments →" link. The link sets the address filter to
+  UNSTRUCTURED, adds the addressFormat column and scrolls to discovery.
+The counts recompute after generation.
+
+C. Scenario Monte Carlo (seeded, deterministic)
+Inputs: runs (500 / 1000 default / 5000) and "Correspondent SLA stress"
+(Normal ×1 / Elevated ×2 / Severe ×4).
+- PRNG: mulberry32(4242 + N + stress·7).
+- Scenario weights: HAPPY 0.86, SCREEN 0.05, AC03 0.05, TIMEOUT 0.04 × stress.
+- 0.5% of runs get an injected failure partway through.
+- Latency per step = XB base × (0.6 + 0.8r), with IN_TRANSIT multiplied by the
+  stress factor.
+Output:
+- animated outcome bars: COMPLETED green, RETURNED violet, FAILED red, FAILURE
+  INJECTED amber
+- STP % (happy runs without injection), mean latency, p95, total ISO messages,
+  exceptions, investigations
+- "Kuber would draft N cases — every one behind the human approval boundary.
+  No completion is ever inferred for FAILED or RETURNED runs."
+
+=====================================================================
+16. COMMAND PALETTE & KEYBOARD
+=====================================================================
+- Ctrl/⌘+K (or the header button) opens a centered modal with a blurred
+  backdrop and an input "Jump to a payment, section or action…".
+- Results:
+  • actions: ▶ Start simulation, ❚❚ Pause simulation, ↺ Reset simulation,
+    ⚡ Inject failure, ＋ Generate +100, ⇩ Export CSV
+  • sections: § …
+  • up to 25 payments matching the search index ("ID · rail · debtor →
+    creditor", tagged with status)
+- ↑/↓ moves, Enter runs, and clicking an item runs it.
+- Escape (handled globally) closes the palette, the column menu and the
+  tooltip. A click on the backdrop also closes it.
+- "/" focuses the discovery search when you aren't typing in a field.
+
+=====================================================================
+17. RESPONSIVE DESIGN
+=====================================================================
+Desktop (>1500px):
+- 7 KPI columns; charts 4 across; Payment 360 in 3 columns; Kuber in 3
+  columns; simulator in 2 columns; drilldown and lab 3 across
+- max content width 1720px with 22px gutters
+≤1500px:
+- KPIs in 4 columns; charts 2×2
+- Payment 360 in 2 columns, with the lifecycle column spanning full width
+- Kuber in 2 columns, with evidence spanning full width
+≤1250px:
+- KPIs in 3 columns
+- Payment 360, Kuber and the simulator stacked
+- filters in 3 columns; discovery sidebar 230px; drilldown and lab 2 columns
+≤850px:
+- a single column everywhere and 14px gutters
+- compact sticky header: smaller logo and title, pills wrap onto one row, the
+  ticker and Ctrl K button are hidden
+- KPIs in 2 columns; the field catalogue sits on top at 220px max height;
+  filters in 2 columns
+- simulation controls in 2 columns, with speed on its own row; stat tiles in
+  2 columns; state machine in 4 columns
+- donut and legend stacked
+≤480px: state machine in 3 columns, filters in 1 column.
+Tables and SVG diagrams scroll horizontally inside their own wrappers. The
+page itself must NEVER scroll horizontally, at any of 1600 / 1200 / 820 / 390px.
+
+=====================================================================
+18. IMPLEMENTATION STRUCTURE
+=====================================================================
+Recommended code order:
+1 constants/theme/helpers ($, esc, fmtN, fmtAmt, fmtShort, fmtMs, hash
+  (FNV-1a), mulberry32, pick, uuid, toast, badgeCls/badge, payStatusFromState,
+  reasonCode)
+2 reference data + field catalogue (FIELDS, FIELD map, CATEGORIES, DEFAULT_COLS,
+  COL_PRESETS, MT_MAP)
+3 payment factory mk/derive + canonical PAYMENTS
+4 generator (genPayment, generateMorePayments)
+5 app state {mode, activeId, cols, f, qf, drill, sort, page, pageSize, tab,
+  isoView, filtered} + tooltip
+6 KPIs, personas, charts (drawDonut, drawType, drawTrend, renderCharts)
+7 discovery (renderFieldCatalogue, toggleCol, renderColumnCatalogue,
+  populateFilters, parseQuery, serializeQf, searchIndex, applyFilters,
+  renderChips, clearAllFilters, cellHtml, renderResults, runSearch,
+  exportCurrentView)
+8 drilldowns, mandates, ticker
+9 SCENARIOS, LAT, stepLatency, actorFor, scenarioForPayment, adaptSteps,
+  buildEvent, baselineEvents, paymentEvents
+10 Payment 360 (lineageNodes, journey, stateLabel, statusIndicator,
+  renderLineage, animatePacket, renderEventsTab, isoXml, xmlHi,
+  renderMessagesTab, renderPartiesTab, renderPayment360, renderLifecycle,
+  selectPayment)
+11 simulation engine (section 12 functions)
+12 Kuber (AGENTS, renderAgents, selectAgent, evidenceItems, confidence,
+  actionsFor, renderEvidence, kuberSay, semanticSummary, answerFor,
+  kuberAnswer, askKuber)
+13 lab (renderRouter, REGS, renderRegs, runMonteCarlo), palette
+14 bind() + init() on DOMContentLoaded
+
+REQUIRED ELEMENT IDS (tests rely on them):
+kpis, modeSeg, modeLabel, entPill, personaCards, donutStatus, legStatus,
+donutRail, legRail, typeBars, trend, gen100, gen1000, colBtn, colMenu,
+colPresets, colList, colCount, exportBtn, fieldCat, fcSearch, fcSummary, q, qBtn,
+qClear, hints, fDomain, fRail, fStatus, fMsg, fCcy, fMin, chips, grid, gridHead,
+gridBody, gridStats, pageSize, pgPrev, pgInfo, pgNext, p360, p360Tag, p360Id,
+p360Tabs (buttons with data-t), p360Body, p360Life, p360Sim, p360Ask, lineSvg,
+pkt, pktHalo, lineState, lineInd, p360State, p360Ind, isoXml, partyGraph,
+simulator, simScenario, simPayment, simSpeed (buttons with data-s), simStart,
+simPause, simReset, simInject, simHint, simBanner, simMode, simModeTop,
+simOutcome, simState, simElapsed, simEvents, simIso, simExc, simRunId,
+simScenarioName, simStepInfo, stateMachine, simProg, seq, simLog, mLat, mHops,
+mIso, simNote, simPath, simPayload, payloadTag, runHist, custDrill, railDrill,
+mandates, kuber, agents (with data-a), kActive, kActiveRole, convo, qchips,
+askIn, askBtn, kPay, evPay, kConf, kComp, evidence, actions, rrAmt, rrDest,
+rrUrg, rrTime, rrOut, regs, addrLink, mcN, mcStress, mcRun, mcOut, pal, palIn,
+palRes, palBtn, tip, toast, ticker.
+Grid rows use data-id. Field rows use data-f. Category <details> use data-cat.
+
+INITIALIZATION (in order):
+1. Append 60 generated payments.
+2. bind(); ticker; KPIs; personas; charts.
+3. populate filters; field catalogue; column catalogue; results.
+4. selectAgent('orchestrator', quiet).
+5. Set the sim payment to PAY-CB-000001, populate the selector and set the
+   scenario to HAPPY.
+6. selectPayment('PAY-CB-000001', quiet); renderSimAll(); run history.
+7. Customer and rail drilldowns, mandates, evidence, router and regs.
+8. The Orchestrator greeting.
+The simulator must start at READY / NO RUN / 0 ms / 0 ISO messages / 0
+exceptions, and nothing auto-runs.
+
+=====================================================================
+19. ACCEPTANCE TESTS (verify all before returning)
+=====================================================================
+Verify with a headless browser (e.g. Playwright/Chromium) if available.
+Otherwise reason through each test carefully.
+1 Title exact. 2 7 KPI cards with $1.84T, 99.42% and 237.
+3 Initial sim READY / NO RUN / "0 ms" / "0 ISO messages" / "0 exceptions";
+  PAY-CB-000001 active.
+4 Donuts have 5+5 segments, 12 type bars and 7 trend hover columns. Hovering
+  the "Rejected" segment shows "5%" and "$96B"; the tooltip hides on leave;
+  trend and type tooltips work.
+5 "rejected swift over 1m" returns only REJECTED SWIFT rows with amount ≥ 1M
+  and creates ≥3 chips.
+6 "a9f4c1e8" returns exactly PAY-CB-000001. "bic:CITIUS33" returns rows.
+  "HSBC Treasury" includes PAY-CB-000001.
+7 The Status and Rail selects filter correctly; removing a chip clears only
+  that filter; Clear all restores the full universe.
+8 Toggling a catalogue checkbox adds a column; presets work; header sort
+  works; pagination works.
+9 Clicking the PAY-RETURN-000001 row updates Payment 360, which shows
+  "RJCT · AC03", with no "Completed" or "COMPLETED" anywhere in #p360.
+  The lineage shows JPMorgan and Barclays but no Intermediary node.
+10 The EVENTS tab shows "Creditor account invalid · AC03" and "IN_TRANSIT →
+  REJECTED". MESSAGES pacs.004 contains <RtrRsnInf><Rsn><Cd>AC03. All 10 ISO
+  builders return XML. The PARTIES graph shows the real names.
+11 Selecting a payment makes it the simulation payment.
+12 Looping over EVERY non-COMPLETED payment across the LINEAGE, EVENTS and
+  PARTIES tabs never finds "Completed" or "COMPLETED" in #p360.
+13 +100 and +1,000 add exactly that many payments. Every generated SWIFT
+  payment has a valid UUIDv4 UETR, the required fields are populated, and the
+  large majority are COMPLETED.
+14 CSV downloads as kuber-payment-view.csv, with row count = filtered rows and
+  the header containing "Payment ID".
+15 Selecting an agent works; Ask Kuber answers deterministically with the
+  boundary line; PAY-CB-000001 confidence = 0.94; the summary contains
+  "Payment is progressing through the correspondent chain" and "Confidence:
+  0.94"; simulated approval works.
+16 Inject Failure while idle → "START SIMULATION FIRST".
+17 Happy Path on PAY-CB-000001 at 10x → COMPLETED, 8 events, 7 ISO messages,
+  0 exceptions, payload ACCC, all nodes green, Payment 360 shows "Completed"
+  and "ACCC · Settled", and journey kind ok.
+18 Correspondent Timeout → FAILED with the exact path INITIATED, ACCEPTED,
+  SCREENING, SENT, IN_TRANSIT, INVESTIGATION, FAILED; exc 2; StatusReason
+  NACK_TIMEOUT; no "Completed" in 360.
+19 AC03 → the last two events are REJECTED then RETURNED; payload RTND; the
+  REJECTED payload has StatusReason AC03 and PaymentStatus RJCT; no
+  "Completed" in 360.
+20 Screening Hold on PAY-SCREEN-000001 → INITIATED, ACCEPTED, SCREENING,
+  INVESTIGATION, SCREENING, SENT, SETTLEMENT_PENDING, COMPLETED.
+21 Pause holds the event count and shows mode PAUSED; Start resumes; changing
+  speed takes effect.
+22 Inject while running → state FAILED, outcome "FAILURE INJECTED", last msg
+  pacs.002 RJCT, payload RJCT/FAILED, banner contains FAILURE INJECTED, a red
+  node plus struck-through nodes, and Payment 360 state "Failed".
+23 Reset → READY, NO RUN, "0 ms", "0 ISO messages", "0 exceptions", 0 events,
+  and the payment is restored to its original status with simState cleared.
+24 The event log is newest first. The sequence diagram draws arrows. Run
+  history records runs.
+25 Router: $25M domestic instant → Fedwire recommended. Monte Carlo renders
+  STP.
+26 DOME persona → every row DOME and the active payment DOME.
+27 Ctrl+K opens the palette and Escape closes it.
+28 No horizontal page scroll at 1600, 1200, 820 and 390px.
+29 Zero console errors and zero network requests.
+30 JavaScript passes node --check.
+
+=====================================================================
+20. DELIVERABLE
+=====================================================================
+Return the complete, runnable file payment_intelligence_command_center_v4.html
+(not a snippet). It must open directly in a browser. Briefly summarize what
+was built and how it was verified. If you add further innovations, list them,
+and confirm that none of them breaks the rules above (above all the state
+consistency rule and the no-external-action boundary).
+=====================================================================
+END OF PROMPT
+=====================================================================

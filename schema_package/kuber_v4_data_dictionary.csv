@@ -1,0 +1,742 @@
+module,object_type,object_name,column_name,data_type,nullable,key,references,description
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,rule_id,integer,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,applies_status,character varying(24),NO,UK,ref_payment_status.status,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,condition_sql,text,YES,,,"optional predicate over v_payment_current (documented, evaluated in fn_kuber_actions)"
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,variant,character varying(16),NO,UK,,e.g. SCREENING vs OTHER for INVESTIGATION
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,sort_order,smallint,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,action_code,character varying(24),NO,UK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,title_template,text,NO,,,tokens: {next_hop} {nostro} {creditor_agent} …
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,detail_template,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_action_rule,owning_agent_id,character varying(24),NO,,ai_agent.agent_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,agent_id,character varying(24),NO,PK,,orchestrator investigator correspondent risk liquidity recon iso
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,agent_name,text,NO,UK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,role_text,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,icon,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,color_token,character varying(8),NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,status_text,text,NO,,,'watching 31 chains'
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,system_prompt,text,NO,,,agent instructions (see seed)
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,allowed_tools,ARRAY,NO,,,MCP tool names this agent may call
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,principal_id,character varying(40),NO,,app_user.user_id,AGENT principal
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_agent,sort_order,smallint,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_conversation,conversation_id,uuid,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_conversation,user_id,character varying(40),NO,,app_user.user_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_conversation,mode_code,character varying(8),YES,,persona.mode_code,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_conversation,started_at,timestamp with time zone,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_evidence_dimension,dimension_code,character varying(12),NO,PK,,IDENTITY ISO LINEAGE STATE RISK LIQUIDITY OWNER
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_evidence_dimension,sort_order,smallint,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_evidence_dimension,description,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_evidence_item,message_id,bigint,NO,PK,ai_message.message_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_evidence_item,dimension_code,character varying(12),NO,PK,ai_evidence_dimension.dimension_code,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_evidence_item,value_text,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_evidence_item,is_present,boolean,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_intent,intent_code,character varying(16),NO,PK,,mandate risk liquidity address iso recon owner reject lineage action summary
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_intent,priority,smallint,NO,UK,,evaluation order
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_intent,pattern,text,NO,,,"POSIX regex, case-insensitive"
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_intent,routed_agent_id,character varying(24),NO,,ai_agent.agent_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_intent,evidence_dims,ARRAY,NO,,,evidence chips cited in the answer
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_intent,description,text,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,message_id,bigint,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,conversation_id,uuid,NO,,ai_conversation.conversation_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,role,character varying(8),NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,agent_id,character varying(24),YES,,ai_agent.agent_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,routed_from_agent_id,character varying(24),YES,,ai_agent.agent_id,'Orchestrator → routed to X'
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,payment_id,character varying(64),YES,,payment.payment_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,intent_code,character varying(16),YES,,ai_intent.intent_code,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,content,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,confidence,numeric,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,evidence_dims,ARRAY,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,model_name,text,YES,,,e.g. gemini-3.1-pro (for audit)
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,boundary_text,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_message,created_at,timestamp with time zone,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,action_id,bigint,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,payment_id,character varying(64),NO,UK,payment.payment_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,action_code,character varying(24),NO,UK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,title,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,detail,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,proposed_by_agent_id,character varying(24),NO,,ai_agent.agent_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,confidence,numeric,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,status,character varying(12),NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,decided_by,character varying(40),YES,,app_user.user_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,decided_at,timestamp with time zone,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,external_executed,boolean,NO,,,simulator: never executes
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_proposed_action,created_at,timestamp with time zone,NO,UK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_quick_prompt,agent_id,character varying(24),NO,PK,ai_agent.agent_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_quick_prompt,sort_order,smallint,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_quick_prompt,prompt_text,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_recommendation,recommendation_id,bigint,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_recommendation,payment_id,character varying(64),NO,,payment.payment_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_recommendation,agent_id,character varying(24),NO,,ai_agent.agent_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_recommendation,recommendation,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_recommendation,confidence,numeric,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_recommendation,source_event_id,bigint,YES,,payment_event.event_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_recommendation,created_at,timestamp with time zone,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,tool_call_id,bigint,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,message_id,bigint,YES,,ai_message.message_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,agent_id,character varying(24),YES,,ai_agent.agent_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,tool_name,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,arguments,jsonb,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,result_digest,text,YES,,,hash / summary (not the full PII payload)
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,row_count,integer,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,latency_ms,integer,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,succeeded,boolean,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.ai_tool_call,called_at,timestamp with time zone,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.app_user,user_id,character varying(40),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.app_user,display_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.app_user,principal_type,character varying(8),NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.app_user,department_code,character varying(40),YES,,department.department_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.app_user,role_code,character varying(24),NO,,,"OPERATOR, SUPERVISOR, ANALYST, AGENT"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.app_user,is_active,boolean,NO,,,
+J. GOVERNANCE & AUDIT,TABLE,kuber.audit_log,audit_id,bigint,NO,PK,,
+J. GOVERNANCE & AUDIT,TABLE,kuber.audit_log,occurred_at,timestamp with time zone,NO,,,
+J. GOVERNANCE & AUDIT,TABLE,kuber.audit_log,actor_id,character varying(40),YES,,,
+J. GOVERNANCE & AUDIT,TABLE,kuber.audit_log,action,text,NO,,,SIM_START SIM_INJECT ACTION_APPROVE EXPORT_CSV …
+J. GOVERNANCE & AUDIT,TABLE,kuber.audit_log,entity_type,text,NO,,,
+J. GOVERNANCE & AUDIT,TABLE,kuber.audit_log,entity_id,text,NO,,,
+J. GOVERNANCE & AUDIT,TABLE,kuber.audit_log,details,jsonb,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.bank,bic,character varying(11),NO,PK,,BICFI
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.bank,bank_name,text,NO,UK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.bank,country_code,character(2),YES,,ref_country.country_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.bank,is_gpi_member,boolean,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.column_preset,preset_code,character varying(40),NO,PK,,"DEFAULT_ALL, DEFAULT_CBCC, DEFAULT_DOME, Operations, ISO 20022, Network, Risk & Liquidity"
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.column_preset,preset_label,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.column_preset,mode_code,character varying(8),YES,,persona.mode_code,set for persona defaults
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.column_preset_field,preset_code,character varying(40),NO,PK,column_preset.preset_code,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.column_preset_field,position,smallint,NO,PK,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.column_preset_field,field_id,character varying(40),NO,,field_catalogue.field_id,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.customer,customer_id,character varying(32),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.customer,customer_name,text,NO,UK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.customer,segment,character varying(32),YES,,,"Corporate, Global Corporate, Financial Institutions …"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.customer,country_code,character(2),YES,,ref_country.country_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.customer,legal_entity_id,character varying(32),YES,,legal_entity.legal_entity_id,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.customer_metric_daily,business_date,date,NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.customer_metric_daily,customer_id,character varying(32),NO,PK,customer.customer_id,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.customer_metric_daily,display_name,text,NO,,,'HSBC Treasury'
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.customer_metric_daily,value_usd,numeric,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.customer_metric_daily,stp_rate_pct,numeric,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.department,department_code,character varying(40),NO,PK,,"'Equity Operations', 'FI Payments' …"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.department,department_name,text,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,business_date,date,NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,chart_code,character varying(16),NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,bucket,text,NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,sort_order,smallint,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,share_pct,numeric,NO,,,volume share
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,value_usd,numeric,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,display_value,text,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_breakdown,color_token,character varying(8),YES,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,business_date,date,NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,kpi_code,character varying(24),NO,PK,,PAYMENT_VALUE PAYMENTS STP_RATE SUCCESS_RATE EXCEPTIONS AVG_LATENCY AI_CASES
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,sort_order,smallint,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,label,text,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,numeric_value,numeric,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,unit,character varying(8),NO,,,USD COUNT PCT SEC COUNT
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,display_value,text,NO,,,'$1.84T'
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,delta_text,text,YES,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,delta_is_warning,boolean,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_snapshot,accent_token,character varying(8),YES,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_spark,business_date,date,NO,PK,"exec_kpi_snapshot.business_date,exec_kpi_snapshot.kpi_code",
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_spark,kpi_code,character varying(24),NO,PK,"exec_kpi_snapshot.business_date,exec_kpi_snapshot.kpi_code",
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_spark,point_date,date,NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_kpi_spark,value,numeric,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_trend_daily,business_date,date,NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_trend_daily,payment_count,bigint,NO,,,"8,720,000"
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.exec_trend_daily,payment_value_usd,numeric,NO,,,1.84e12
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,field_id,character varying(40),NO,PK,,camelCase id used by UI / API
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,display_name,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,category_name,text,NO,,field_category.category_name,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,domain_code,character varying(8),NO,,,ALL | CBCC | DOME
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,message_types,ARRAY,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,data_type,character varying(12),NO,,,id uuid enum status text amount number date datetime
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,searchable,boolean,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,displayable,boolean,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,filter_type,character varying(8),NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,sortable,boolean,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,groupable,boolean,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,description,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,example,text,YES,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,source_view,text,NO,,,where the agent reads it
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,source_column,text,NO,,,snake_case column in source_view
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,iso_path_hint,text,YES,,,semantic hint only (e.g. 'CdtTrfTxInf/PmtId/UETR')
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_catalogue,synonyms,ARRAY,NO,,,NL aliases for the agent
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_category,category_name,text,NO,PK,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.field_category,sort_order,smallint,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,investigation_id,character varying(32),NO,PK,,INV-90244
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,payment_id,character varying(64),NO,,payment.payment_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,case_type,character varying(24),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,status,character varying(16),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,assignee_bic,character varying(11),YES,,bank.bic,camt.056 Assgne
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,owner_user_id,character varying(40),YES,,app_user.user_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,sim_run_id,character varying(32),YES,,sim_run.run_id,set when opened by a simulation run
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,opened_at,timestamp without time zone,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,resolution_code,character varying(4),YES,,,camt.029 Conf
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,resolved_at,timestamp without time zone,YES,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.investigation,notes,text,YES,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,message_id,bigint,NO,PK,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,payment_id,character varying(64),NO,,payment.payment_id,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,event_id,bigint,YES,,payment_event.event_id,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,msg_type,character varying(16),NO,,ref_iso_message_type.msg_type,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,msg_version,character varying(24),YES,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,direction,character varying(3),NO,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,business_msg_id,character varying(64),YES,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,from_bic,character varying(11),YES,,bank.bic,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,to_bic,character varying(11),YES,,bank.bic,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,tx_status,character varying(4),YES,,ref_iso_tx_status.tx_status,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,reason_code,character varying(24),YES,,ref_reason_code.reason_code,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,payload_xml,text,YES,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.iso_message,created_at,timestamp without time zone,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_chunk,chunk_id,bigint,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_chunk,doc_id,bigint,NO,UK,knowledge_document.doc_id,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_chunk,chunk_no,integer,NO,UK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_chunk,content,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_chunk,embedding,USER-DEFINED,YES,,,e.g. Gemini embedding truncated to 768 dims
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_document,doc_id,bigint,NO,PK,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_document,title,text,NO,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_document,source_uri,text,YES,,,
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_document,doc_type,character varying(24),NO,,,ISO_GUIDELINE RUNBOOK SCHEME_RULE REGULATION
+H. KUBER AGENTIC OPERATIONS,TABLE,kuber.knowledge_document,effective_date,date,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.legal_entity,legal_entity_id,character varying(32),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.legal_entity,name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.legal_entity,country_code,character(2),YES,,ref_country.country_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.legal_entity,lei,character(20),YES,,,ISO 17442 LEI (optional)
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.liquidity_position,account_id,character varying(32),NO,PK,settlement_account.account_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.liquidity_position,as_of,timestamp without time zone,NO,PK,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.liquidity_position,ledger_balance,numeric,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.liquidity_position,available_balance,numeric,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.liquidity_position,buffer_amount,numeric,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.liquidity_position,liquidity_state,character varying(16),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,mandate_id,character varying(32),NO,PK,,MND-GTA-1800
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,display_no,smallint,YES,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,customer_id,character varying(32),YES,,customer.customer_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,description,text,NO,,,'USD liquidity top-up'
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,due_time,time without time zone,NO,,,ET
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,due_tz,text,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,linked_payment_id,character varying(64),YES,,payment.payment_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,coverage_pct,numeric,YES,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,readiness,character varying(16),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.mandate_obligation,readiness_note,text,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_outcome,mc_run_id,bigint,NO,PK,mc_run.mc_run_id,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_outcome,outcome,character varying(24),NO,PK,,COMPLETED RETURNED FAILED 'FAILURE INJECTED'
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_outcome,run_count,integer,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_outcome,pct,numeric,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,mc_run_id,bigint,NO,PK,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,runs,integer,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,sla_stress,smallint,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,seed,bigint,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,weights,jsonb,NO,,,"{""HAPPY"":0.86,""SCREEN"":0.05,""AC03"":0.05,""TIMEOUT"":0.04}"
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,injection_rate,numeric,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,stp_pct,numeric,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,mean_latency_ms,bigint,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,p95_latency_ms,bigint,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,iso_messages,integer,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,exceptions,integer,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,investigations,integer,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,kuber_cases,integer,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,executed_by,character varying(40),YES,,app_user.user_id,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.mc_run,executed_at,timestamp with time zone,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.nl_query_vocabulary,token,text,NO,PK,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.nl_query_vocabulary,token_kind,character varying(12),NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.nl_query_vocabulary,maps_to,text,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,payment_id,character varying(64),NO,PK,,
+B. CORE PAYMENT,TABLE,kuber.payment,uetr,uuid,YES,UK,,UUIDv4; NULL for rails without UETR
+B. CORE PAYMENT,TABLE,kuber.payment,swift_txn_id,character varying(64),YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,business_msg_id,character varying(64),NO,,,head.001 BizMsgIdr
+B. CORE PAYMENT,TABLE,kuber.payment,instruction_id,character varying(64),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,end_to_end_id,character varying(64),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,domain_code,character varying(8),NO,,ref_domain.domain_code,
+B. CORE PAYMENT,TABLE,kuber.payment,rail_code,character varying(24),NO,,ref_rail.rail_code,
+B. CORE PAYMENT,TABLE,kuber.payment,payment_type,character varying(64),NO,,ref_payment_type.payment_type,
+B. CORE PAYMENT,TABLE,kuber.payment,scheme_code,character varying(40),YES,,ref_scheme.scheme_code,
+B. CORE PAYMENT,TABLE,kuber.payment,business_code,character varying(32),YES,,payment_business.business_code,
+B. CORE PAYMENT,TABLE,kuber.payment,message_type,character varying(16),NO,,ref_iso_message_type.msg_type,primary / current message
+B. CORE PAYMENT,TABLE,kuber.payment,iso_version,character varying(24),YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,purpose_code,character varying(8),YES,,,CtgyPurp: SUPP TREA INTC SALA GDDS CASH
+B. CORE PAYMENT,TABLE,kuber.payment,priority,character varying(8),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,settlement_method,character varying(4),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,clearing_system,text,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,corridor,text,YES,,,'US → GB'
+B. CORE PAYMENT,TABLE,kuber.payment,amount,numeric,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,debit_ccy,character(3),NO,,ref_currency.ccy,
+B. CORE PAYMENT,TABLE,kuber.payment,credit_ccy,character(3),NO,,ref_currency.ccy,
+B. CORE PAYMENT,TABLE,kuber.payment,fx_rate,numeric,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,charge_bearer,character varying(4),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,fee_amount_usd,numeric,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,settlement_date,date,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,initiated_at,timestamp without time zone,NO,,,business-local timestamp as shown in UI
+B. CORE PAYMENT,TABLE,kuber.payment,record_completed_at,timestamp without time zone,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,record_processing_ms,bigint,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,record_duration_text,text,YES,,,as displayed by the source platform ('17m 42s')
+B. CORE PAYMENT,TABLE,kuber.payment,record_intermediate_status,character varying(40),YES,,,"WAITING_CORRESPONDENT, SETTLED, ACCC, …"
+B. CORE PAYMENT,TABLE,kuber.payment,record_status_reason_code,character varying(24),YES,,ref_reason_code.reason_code,FK added after ref_reason_code seed-safe
+B. CORE PAYMENT,TABLE,kuber.payment,record_status_reason_text,text,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,record_screening_state,character varying(40),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,record_recon_state,character varying(16),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,customer_id,character varying(32),YES,,customer.customer_id,
+B. CORE PAYMENT,TABLE,kuber.payment,initiation_department,character varying(40),YES,,department.department_code,
+B. CORE PAYMENT,TABLE,kuber.payment,owner_user_id,character varying(40),YES,,app_user.user_id,
+B. CORE PAYMENT,TABLE,kuber.payment,nostro_account_id,character varying(32),YES,,settlement_account.account_id,
+B. CORE PAYMENT,TABLE,kuber.payment,liquidity_state,character varying(16),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,risk_score,smallint,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,mandate_id,character varying(32),YES,,mandate_obligation.mandate_id,FK added after mandate_obligation
+B. CORE PAYMENT,TABLE,kuber.payment,current_state,character varying(32),YES,,ref_payment_state.state,
+B. CORE PAYMENT,TABLE,kuber.payment,current_message_type,character varying(16),YES,,ref_iso_message_type.msg_type,pacs.004 after a return
+B. CORE PAYMENT,TABLE,kuber.payment,completed_at,timestamp without time zone,YES,,,ONLY when status = COMPLETED (see CHECK)
+B. CORE PAYMENT,TABLE,kuber.payment,processing_ms,bigint,YES,,,end-to-end duration
+B. CORE PAYMENT,TABLE,kuber.payment,status,character varying(24),NO,,ref_payment_status.status,
+B. CORE PAYMENT,TABLE,kuber.payment,ultimate_status,character varying(24),NO,,ref_payment_status.status,
+B. CORE PAYMENT,TABLE,kuber.payment,intermediate_status,character varying(40),NO,,,"state or operational sub-state (WAITING_CORRESPONDENT, SETTLED, ACCC)"
+B. CORE PAYMENT,TABLE,kuber.payment,status_reason_code,character varying(24),YES,,ref_reason_code.reason_code,
+B. CORE PAYMENT,TABLE,kuber.payment,status_reason_text,text,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment,screening_state,character varying(40),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,recon_state,character varying(16),NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,active_sim_run_id,character varying(32),YES,,sim_run.run_id,FK added later; NULL = baseline stream is authoritative
+B. CORE PAYMENT,TABLE,kuber.payment,current_investigation_id,character varying(32),YES,,investigation.investigation_id,FK added later
+B. CORE PAYMENT,TABLE,kuber.payment,created_at,timestamp with time zone,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment,updated_at,timestamp with time zone,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment_agent_hop,payment_id,character varying(64),NO,"PK,UK",payment.payment_id,
+B. CORE PAYMENT,TABLE,kuber.payment_agent_hop,hop_seq,smallint,NO,PK,,
+B. CORE PAYMENT,TABLE,kuber.payment_agent_hop,agent_role,character varying(20),NO,UK,,
+B. CORE PAYMENT,TABLE,kuber.payment_agent_hop,bic,character varying(11),NO,,bank.bic,
+B. CORE PAYMENT,TABLE,kuber.payment_agent_hop,received_at,timestamp without time zone,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment_agent_hop,forwarded_at,timestamp without time zone,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.payment_business,business_code,character varying(32),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.payment_business,legal_entity_id,character varying(32),YES,,legal_entity.legal_entity_id,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.payment_business,domain_code,character varying(8),YES,,ref_domain.domain_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.payment_business,business_name,text,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment_charge,charge_id,bigint,NO,PK,,
+B. CORE PAYMENT,TABLE,kuber.payment_charge,payment_id,character varying(64),NO,,payment.payment_id,
+B. CORE PAYMENT,TABLE,kuber.payment_charge,charged_by_bic,character varying(11),YES,,bank.bic,
+B. CORE PAYMENT,TABLE,kuber.payment_charge,amount,numeric,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment_charge,ccy,character(3),NO,,ref_currency.ccy,
+B. CORE PAYMENT,TABLE,kuber.payment_charge,charge_type,character varying(16),NO,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,event_id,bigint,NO,PK,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,payment_id,character varying(64),NO,,payment.payment_id,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,sim_run_id,character varying(32),YES,,sim_run.run_id,NULL = baseline / network stream
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,seq,smallint,NO,,,"1..n within (payment, stream)"
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,state,character varying(32),NO,,ref_payment_state.state,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,prev_state,character varying(32),YES,,ref_payment_state.state,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,description,text,NO,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,iso_message,character varying(32),NO,,,as displayed: 'pacs.002 ACSP'
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,iso_msg_type,character varying(16),YES,,ref_iso_message_type.msg_type,base type parsed from iso_message
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,iso_tx_status,character varying(4),YES,,ref_iso_tx_status.tx_status,TxSts carried by the message (if any)
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,actor,text,NO,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,reason_code,character varying(24),YES,,ref_reason_code.reason_code,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,reason_text,text,YES,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,event_ts,timestamp without time zone,NO,,,simulated business timestamp
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,processing_ms,bigint,NO,,,simulated latency of this step
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,wall_elapsed_ms,bigint,YES,,,"simulator wall-clock (event log ""0.0s"")"
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,failure_injected,boolean,NO,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,source,character varying(12),NO,,,
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,iso_payload,json,YES,,,generated ISO event JSON (json keeps key order)
+"D. EVENTS & ISO MESSAGES (append-only, single source of truth)",TABLE,kuber.payment_event,recorded_at,timestamp with time zone,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,exception_id,bigint,NO,PK,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,payment_id,character varying(64),NO,,payment.payment_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,event_id,bigint,YES,,payment_event.event_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,exception_type,character varying(24),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,reason_code,character varying(24),YES,,ref_reason_code.reason_code,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,severity,character varying(8),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,status,character varying(12),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,opened_at,timestamp without time zone,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.payment_exception,closed_at,timestamp without time zone,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment_party,payment_id,character varying(64),NO,PK,payment.payment_id,
+B. CORE PAYMENT,TABLE,kuber.payment_party,party_role,character varying(20),NO,PK,,
+B. CORE PAYMENT,TABLE,kuber.payment_party,party_name,text,NO,,,
+B. CORE PAYMENT,TABLE,kuber.payment_party,customer_id,character varying(32),YES,,customer.customer_id,
+B. CORE PAYMENT,TABLE,kuber.payment_party,account_id,text,YES,,,IBAN / proprietary / routing-account
+B. CORE PAYMENT,TABLE,kuber.payment_party,country_code,character(2),YES,,ref_country.country_code,
+B. CORE PAYMENT,TABLE,kuber.payment_party,address_format,character varying(12),YES,,,CBPR+ SR2026 readiness
+B. CORE PAYMENT,TABLE,kuber.payment_party,street_name,text,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment_party,building_no,text,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment_party,post_code,text,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment_party,town_name,text,YES,,,
+B. CORE PAYMENT,TABLE,kuber.payment_party,address_lines,ARRAY,YES,,,only for UNSTRUCTURED / HYBRID remainder
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona,mode_code,character varying(8),NO,PK,,CBCC | DOME | ALL
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona,domain_label,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona,title,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona,description,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona,mode_label,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona,default_agent_id,character varying(24),YES,,ai_agent.agent_id,FK added after ai_agent
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona_tag,mode_code,character varying(8),NO,PK,persona.mode_code,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona_tag,tag,text,NO,PK,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.persona_tag,sort_order,smallint,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,business_date,date,NO,PK,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,rail_label,text,NO,PK,,includes 'Other'
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,rail_code,character varying(24),YES,,ref_rail.rail_code,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,sort_order,smallint,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,value_usd,numeric,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,display_value,text,NO,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,latency_display,text,NO,,,"'2.1s p95', '6.0h avg', '—'"
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,latency_ms,bigint,YES,,,
+G. EXECUTIVE RADAR / ANALYTICS SNAPSHOTS,TABLE,kuber.rail_metric_daily,latency_stat,character varying(4),YES,,,p95 | avg
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,option_code,character varying(24),NO,PK,,"'SWIFT CBPR+','RTP','FedNow','Fedwire','Same Day ACH','ACH (next day)'"
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,rail_code,character varying(24),YES,,ref_rail.rail_code,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,destination,character varying(4),NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,max_amount_usd,numeric,YES,,,NULL = no cap
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,business_hours_only,boolean,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,allowed_urgency,ARRAY,NO,,,INSTANT SAMEDAY NEXT
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,speed_score,smallint,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,cost_score,smallint,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,eligible_note,text,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,over_limit_note,text,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.rail_route_rule,sort_order,smallint,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,recon_id,bigint,NO,PK,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,payment_id,character varying(64),NO,,payment.payment_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,account_id,character varying(32),YES,,settlement_account.account_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,source_msg_type,character varying(16),YES,,ref_iso_message_type.msg_type,camt.053 / camt.054 / camt.052
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,statement_ref,text,YES,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,recon_state,character varying(16),NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,break_reason,text,YES,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.reconciliation_item,matched_at,timestamp without time zone,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_country,country_code,character(2),NO,PK,,ISO 3166-1 alpha-2
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_country,country_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_country,region_code,character varying(8),YES,,ref_region.region_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_currency,ccy,character(3),NO,PK,,ISO 4217
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_currency,ccy_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_currency,minor_units,smallint,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_domain,domain_code,character varying(8),NO,PK,,CBCC | DOME
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_domain,domain_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_domain,description,text,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_iso_message_type,msg_type,character varying(16),NO,PK,,"pacs.008, camt.056 …"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_iso_message_type,msg_family,character varying(8),NO,,,pain | pacs | camt | head
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_iso_message_type,msg_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_iso_message_type,default_version,character varying(24),YES,,,pacs.008.001.08
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_iso_message_type,description,text,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_iso_tx_status,tx_status,character varying(4),NO,PK,,ACCC ACSP RJCT RTND PDNG RCVD CANC
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_iso_tx_status,meaning,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_mt_mx_mapping,mt_type,character varying(24),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_mt_mx_mapping,mx_type,character varying(24),NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_mt_mx_mapping,meaning,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,state,character varying(32),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,sort_order,smallint,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,iso_tx_status,character varying(4),NO,,ref_iso_tx_status.tx_status,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,payment_status,character varying(24),NO,,ref_payment_status.status,projection mapping
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,is_terminal,boolean,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,is_exception,boolean,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,is_happy_path,boolean,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,badge_color,character varying(8),NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_state,description,text,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_status,status,character varying(24),NO,PK,,COMPLETED IN_PROGRESS REJECTED RETURNED INVESTIGATION FAILED CANCELLED
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_status,state_label,text,NO,,,"'Completed','Rejected',… ('Current State' for IN_PROGRESS)"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_status,badge_color,character varying(8),NO,,,g c a r v n bl
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_status,is_exception,boolean,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_status,is_final,boolean,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_type,payment_type,character varying(64),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_type,radar_bucket,character varying(32),YES,,,Customer Credit / Instant / ACH Batch / FI Transfer / Return / Other
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_payment_type,description,text,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,rail_code,character varying(24),NO,PK,,"'SWIFT CBPR+','RTP','FedNow','ACH','Fedwire'"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,rail_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,domain_code,character varying(8),NO,,ref_domain.domain_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,latency_class,character varying(8),NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,network_limit_usd,numeric,YES,,,NULL = no network cap
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,operates_24x7,boolean,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,settlement_model,text,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,iso20022_since,date,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,color_token,character varying(16),YES,,,UI color (cyan/violet/…)
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_rail,description,text,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_reason_code,reason_code,character varying(24),NO,PK,,"AC03, AM04, NACK_TIMEOUT …"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_reason_code,reason_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_reason_code,category,character varying(24),YES,,,ACCOUNT | AMOUNT | REGULATORY | NETWORK | SCREENING
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_reason_code,is_iso,boolean,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_region,region_code,character varying(8),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_region,region_name,text,NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_scheme,scheme_code,character varying(40),NO,PK,,"'CBPR+','TCH RTP','FedNow','Nacha CCD',…"
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_scheme,rail_code,character varying(24),YES,,ref_rail.rail_code,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_scheme,description,text,YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_state_transition,from_state,character varying(32),YES,UK,ref_payment_state.state,NULL = start of stream
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_state_transition,to_state,character varying(32),NO,UK,ref_payment_state.state,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_state_transition,transition_type,character varying(16),NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.ref_state_transition,note,text,YES,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.regulatory_item,reg_id,integer,NO,PK,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.regulatory_item,effective_label,text,NO,,,"'14 Jul 2025', 'Nov 2026'"
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.regulatory_item,effective_date,date,NO,,,approximate date used for countdowns when only the month is published
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.regulatory_item,title,text,NO,,,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.regulatory_item,applies_domain,character varying(8),YES,,ref_domain.domain_code,
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.regulatory_item,impact_check,character varying(24),YES,,,e.g. ADDRESS_FORMAT → drives at-risk counts
+"I. INNOVATION LAB: RAIL ROUTER, REGULATORY HORIZON, MONTE CARLO",TABLE,kuber.regulatory_item,source_uri,text,YES,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,view_id,bigint,NO,PK,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,owner_user_id,character varying(40),NO,,app_user.user_id,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,view_name,text,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,mode_code,character varying(8),YES,,persona.mode_code,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,query_text,text,YES,,,raw NL query ('rejected swift over 1m')
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,parsed_query,jsonb,YES,,,"{status[],rail[],domain,msg[],ccy[],min,max,text[],keys{}}"
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,filters,jsonb,YES,,,select filters + drilldowns
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,columns,ARRAY,NO,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,sort_field,character varying(40),YES,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,sort_dir,smallint,YES,,,
+"F. METADATA: FIELD CATALOGUE, PERSONAS, COLUMN PRESETS, SAVED VIEWS",TABLE,kuber.saved_view,created_at,timestamp with time zone,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,screening_id,bigint,NO,PK,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,payment_id,character varying(64),NO,,payment.payment_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,screened_at,timestamp without time zone,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,engine,text,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,result,character varying(40),NO,,,CLEARED | POTENTIAL MATCH | HOLD — POTENTIAL MATCH | CLEARED (human review) | RELEASED (human review)
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,match_score,numeric,YES,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,hit_details,jsonb,YES,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,reviewed_by,character varying(40),YES,,app_user.user_id,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.screening_result,decision,character varying(12),YES,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.settlement_account,account_id,character varying(32),NO,PK,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.settlement_account,display_name,text,NO,UK,,'USD NOSTRO • 004821'
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.settlement_account,account_type,character varying(16),NO,,,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.settlement_account,ccy,character(3),NO,,ref_currency.ccy,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.settlement_account,servicer_bic,character varying(11),YES,,bank.bic,
+A. ORGANISATION & REFERENCE DATA,TABLE,kuber.settlement_account,legal_entity_id,character varying(32),YES,,legal_entity.legal_entity_id,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_latency_profile,latency_class,character varying(8),NO,PK,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_latency_profile,state,character varying(32),NO,PK,ref_payment_state.state,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_latency_profile,base_ms,bigint,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,run_id,character varying(32),NO,PK,,SIM-20260925-0001
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,scenario_code,character varying(16),NO,,sim_scenario.scenario_code,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,payment_id,character varying(64),NO,,payment.payment_id,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,speed_code,character varying(4),NO,,sim_speed.speed_code,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,mode,character varying(12),NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,outcome,character varying(24),NO,,,RUNNING PAUSED COMPLETED FAILED RETURNED 'FAILURE INJECTED'
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,next_step_no,smallint,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,failure_injected,boolean,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,event_count,integer,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,iso_message_count,integer,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,exception_count,integer,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,simulated_latency_ms,bigint,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,wall_elapsed_ms,bigint,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,hops,smallint,YES,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,started_by,character varying(40),YES,,app_user.user_id,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,started_at,timestamp with time zone,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_run,finished_at,timestamp with time zone,YES,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario,scenario_code,character varying(16),NO,PK,,HAPPY TIMEOUT AC03 SCREEN
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario,scenario_name,text,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario,description,text,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario,expected_outcome,character varying(32),NO,,ref_payment_state.state,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario_step,scenario_code,character varying(16),NO,PK,sim_scenario.scenario_code,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario_step,step_no,smallint,NO,PK,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario_step,state,character varying(32),NO,,ref_payment_state.state,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario_step,description,text,NO,,,
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_scenario_step,iso_message,character varying(32),NO,,,'pacs.002 ACSP' or '—'
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_speed,speed_code,character varying(4),NO,PK,,1x 2x 5x 10x
+C. SIMULATION DEFINITIONS (needed before events reference runs),TABLE,kuber.sim_speed,step_delay_ms,integer,NO,,,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.sla_policy,rail_code,character varying(24),NO,PK,ref_rail.rail_code,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.sla_policy,state,character varying(32),NO,PK,ref_payment_state.state,
+"E. EXCEPTIONS, INVESTIGATIONS, SCREENING, LIQUIDITY, RECON, MANDATES",TABLE,kuber.sla_policy,max_ms,bigint,NO,,,
+K. Agent semantic layer (views),VIEW,kuber.v_address_readiness,unstructured,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_address_readiness,hybrid,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_address_readiness,structured,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_address_readiness,cross_border_total,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_customer_drilldown,business_date,date,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_customer_drilldown,customer_id,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_customer_drilldown,display_name,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_customer_drilldown,value_usd,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_customer_drilldown,stp_rate_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_customer_drilldown,badge_color,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_customer_drilldown,value_display,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,business_date,date,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,chart_code,character varying(16),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,bucket,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,sort_order,smallint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,share_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,value_usd,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,display_value,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,color_token,character varying(8),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_breakdown,value_share_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,business_date,date,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,kpi_code,character varying(24),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,sort_order,smallint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,label,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,numeric_value,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,unit,character varying(8),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,display_value,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,delta_text,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,delta_is_warning,boolean,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,accent_token,character varying(8),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_radar_kpi,sparkline,ARRAY,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_trend,business_date,date,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_trend,label,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_trend,volume_m,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_trend,value_t,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_trend,volume_delta_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_trend,value_delta_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_exec_trend,avg_ticket_usd,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_live_rail_mix,rail,character varying(24),YES,,,Rail — Payment rail / network
+K. Agent semantic layer (views),VIEW,kuber.v_live_rail_mix,payments,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_live_rail_mix,share_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_live_rail_mix,notional,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_live_rail_mix,exception_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_live_status_mix,status,character varying(24),YES,,,Payment Status — Authoritative current state (simulator-driven)
+K. Agent semantic layer (views),VIEW,kuber.v_live_status_mix,payments,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_live_status_mix,share_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_live_status_mix,notional,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,display_no,smallint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,mandate_id,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,customer_name,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,description,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,due,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,due_tz,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,linked_payment_id,character varying(64),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,coverage_pct,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,stored_readiness,character varying(16),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,readiness_note,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,linked_status,character varying(24),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,linked_state_label,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,liquidity_state,character varying(16),YES,,,Liquidity State — Intraday liquidity for the settlement account
+K. Agent semantic layer (views),VIEW,kuber.v_mandate_readiness,live_readiness,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,payment_id,character varying(64),YES,,,Payment ID — Master simulator payment identifier
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,uetr,text,YES,,,UETR — Unique End-to-End Transaction Reference (UUIDv4) — gpi tracking key
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,swift_txn_id,character varying(64),YES,,,Swift Transaction ID — Network transaction reference
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,business_msg_id,character varying(64),YES,,,Business Message ID — Business Application Header BizMsgIdr (head.001)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,instruction_id,character varying(64),YES,,,Instruction ID — PmtId/InstrId — point-to-point reference
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,end_to_end_id,character varying(64),YES,,,End-to-End ID — PmtId/EndToEndId — carried unchanged end to end
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,domain,character varying(8),YES,,,Domain — CBCC (cross-border) or DOME (domestic)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,rail,character varying(24),YES,,,Rail — Payment rail / network
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,payment_type,character varying(64),YES,,,Payment Type — Business payment type
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,scheme,character varying(40),YES,,,Scheme — Scheme / usage guideline
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,purpose,character varying(8),YES,,,Category Purpose — CtgyPurp code
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,message_type,character varying(16),YES,,,Message Type — Primary / current ISO 20022 message
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,original_message_type,character varying(16),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,mt_equivalent,text,YES,,,MT Equivalent — Legacy MT semantic equivalent (mapping only)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,iso_version,character varying(24),YES,,,Message Version — Message definition version
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,address_format,text,YES,,,Postal Address Format — STRUCTURED / HYBRID / UNSTRUCTURED — CBPR+ SR2026 readiness
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,debtor,text,YES,,,Debtor Name — Dbtr/Nm
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,ultimate_debtor,text,YES,,,Ultimate Debtor — UltmtDbtr/Nm
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,debtor_account,text,YES,,,Debtor Account — DbtrAcct/Id
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,debtor_country,character,YES,,,Debtor Country — Dbtr/PstlAdr/Ctry
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,creditor,text,YES,,,Beneficiary — Cdtr/Nm — beneficiary
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,ultimate_creditor,text,YES,,,Ultimate Creditor — UltmtCdtr/Nm
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,creditor_account,text,YES,,,Creditor Account — CdtrAcct/Id (IBAN or proprietary)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,creditor_country,character,YES,,,Creditor Country — Cdtr/PstlAdr/Ctry
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,debtor_agent,text,YES,,,Debtor Agent — DbtrAgt — originating bank
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,correspondent,text,YES,,,Correspondent Bank — Instructed agent / correspondent hop
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,intermediary,text,YES,,,Intermediary Bank — IntrmyAgt1
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,creditor_agent,text,YES,,,Creditor Agent — CdtrAgt — beneficiary bank
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,bic,text,YES,,,BIC — Debtor agent BICFI
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,correspondent_bic,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,intermediary_bic,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,creditor_agent_bic,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,hops,integer,YES,,,Network Hops — Populated agents in the chain
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,amount,numeric,YES,,,Amount — Instructed / interbank settlement amount
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,debit_ccy,character(3),YES,,,Debit Currency — Debit account currency
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,credit_ccy,character(3),YES,,,Credit Currency — Credit currency to beneficiary
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,credit_amount,numeric,YES,,,Credit Amount — Amount credited after FX
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,fx_rate,numeric,YES,,,FX Rate — XchgRate debit→credit currency
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,settlement_date,date,YES,,,Settlement Date — IntrBkSttlmDt
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,initiated_at,timestamp without time zone,YES,,,Initiated At — Initiation timestamp
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,completed_at,timestamp without time zone,YES,,,Completed At — Terminal completion timestamp (blank unless COMPLETED)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,duration,text,YES,,,Processing Duration — End-to-end processing time
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,processing_ms,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,status,character varying(24),YES,,,Payment Status — Authoritative current state (simulator-driven)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,ultimate_status,character varying(24),YES,,,Ultimate Payment Status — Final business outcome
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,intermediate_status,character varying(40),YES,,,Intermediate Payment Status — Operational state machine position
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,sim_state,character varying,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,current_state,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,gpi_status,text,YES,,,gpi Tracker Status — Tracker-style status (TxSts / reason)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,status_reason,text,YES,,,Status Reason — StsRsnInf/Rsn/Cd with description
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,status_reason_code,character varying(24),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,exception_type,text,YES,,,Exception Type — Exception classification
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,settlement_method,character varying(4),YES,,,Method of Payment — SttlmMtd — INDA / INGA / COVE / CLRG
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,clearing_system,text,YES,,,Clearing System — Clearing / settlement system
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,priority,character varying(8),YES,,,Priority — InstrPrty / service level
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,screening,character varying(40),YES,,,Screening State — Sanctions / AML screening state
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,risk_score,smallint,YES,,,Risk Score — Synthetic fraud/AML score 0–100
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,segment,character varying(32),YES,,,Customer Segment — Business segment
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,payment_initiation_dept,character varying(40),YES,,,Payment Initiation Department — Initiating department
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,charges,character varying(4),YES,,,Charge Bearer — ChrgBr — SHAR / DEBT / CRED
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,fee_amount,numeric,YES,,,Fees — Total charges (USD)
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,nostro,text,YES,,,Nostro Account — Nostro / settlement account
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,liquidity_state,character varying(16),YES,,,Liquidity State — Intraday liquidity for the settlement account
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,mandate_ref,character varying(32),YES,,,Mandate / Obligation — Linked mandate or obligation
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,obligation_due,text,YES,,,Obligation Due — Obligation cut-off
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,investigation_id,character varying,YES,,,Investigation ID — Case reference
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,recon_state,character varying(16),YES,,,Reconciliation State — Nostro / ledger reconciliation state
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,owner,text,YES,,,Operations Owner — Accountable operations owner
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,sla_state,text,YES,,,SLA State — SLA health
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,ai_recommendation,text,YES,,,AI Recommendation — Latest Kuber recommendation
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,ai_agent,text,YES,,,AI Agent — Kuber agent that produced the latest recommendation
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,ai_confidence,numeric,YES,,,AI Confidence — Recommendation confidence
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,country,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,state_label,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,status_indicator,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,badge_color,character varying(8),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,active_sim_run_id,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_current,customer_id,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,payment_id,character varying(64),YES,,,Payment ID — Master simulator payment identifier
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,seq,smallint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,state,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,prev_state,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,transition,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,description,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,iso_message,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,iso_msg_type,character varying(16),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,iso_tx_status,character varying(4),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,actor,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,reason,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,event_ts,timestamp without time zone,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,processing_ms,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,processing_time,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,wall_elapsed_ms,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,elapsed_display,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,failure_injected,boolean,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,sim_run_id,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,source,character varying(12),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,iso_payload,json,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_payment_timeline,event_id,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,business_date,date,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,rail_label,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,rail_code,character varying(24),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,sort_order,smallint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,value_usd,numeric,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,display_value,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,latency_display,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,latency_ms,bigint,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_rail_drilldown,latency_stat,character varying(4),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,reg_id,integer,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,effective_label,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,effective_date,date,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,title,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,applies_domain,character varying(8),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,impact_check,character varying(24),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,source_uri,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_regulatory_horizon,status_display,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,run_id,character varying(32),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,scenario_name,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,payment_id,character varying(64),YES,,,Payment ID — Master simulator payment identifier
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,speed_code,character varying(4),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,mode,character varying(12),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,outcome,character varying(24),YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,event_count,integer,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,iso_message_count,integer,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,exception_count,integer,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,events_display,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,iso_display,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,exceptions_display,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,latency,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,hops,smallint,YES,,,Network Hops — Populated agents in the chain
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,failure_injected,boolean,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,started_at,timestamp with time zone,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,finished_at,timestamp with time zone,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,simulation_path,text,YES,,,
+K. Agent semantic layer (views),VIEW,kuber.v_sim_run_summary,scenario_note,text,YES,,,
+K. Logic layer,FUNCTION,kuber.fn_actor_for,"(p_id character varying, p_state text, p_prev text)",text,,,,
+K. Logic layer,FUNCTION,kuber.fn_build_iso_event,(p_event_id bigint),json,,,,
+K. Logic layer,FUNCTION,kuber.fn_decide_action,"(p_action_id bigint, p_user character varying, p_decision text)",text,,,,
+K. Logic layer,FUNCTION,kuber.fn_fmt_amt,"(amount numeric, ccy text)",text,,,,
+K. Logic layer,FUNCTION,kuber.fn_fmt_ms,(ms bigint),text,,,,
+K. Logic layer,FUNCTION,kuber.fn_fmt_short,(n numeric),text,,,,
+K. Logic layer,FUNCTION,kuber.fn_fnv1a,(s text),bigint,,,,
+K. Logic layer,FUNCTION,kuber.fn_gpi_status,"(p_domain text, p_status text, p_reason_code text, p_state text, p_has_hop boolean)",text,,,,
+K. Logic layer,FUNCTION,kuber.fn_kuber_actions,(p_id character varying),"TABLE(sort_order integer, action_code text, title text, detail text, owning_agent text, decision text)",,,,
+K. Logic layer,FUNCTION,kuber.fn_kuber_answer,"(p_id character varying, p_question text, p_active_agent character varying)",json,,,,
+K. Logic layer,FUNCTION,kuber.fn_kuber_confidence,(p_id character varying),"TABLE(confidence numeric, completeness_pct integer, present integer, total integer)",,,,
+K. Logic layer,FUNCTION,kuber.fn_kuber_evidence,(p_id character varying),"TABLE(dimension_code text, sort_order integer, value_text text, is_present boolean)",,,,
+K. Logic layer,FUNCTION,kuber.fn_kuber_propose_actions,"(p_payment character varying, p_agent character varying)",integer,,,,
+K. Logic layer,FUNCTION,kuber.fn_kuber_route,"(p_question text, p_active_agent character varying)","TABLE(intent_code text, answering_agent_id text, routed_from text)",,,,
+K. Logic layer,FUNCTION,kuber.fn_kuber_summary,(p_id character varying),text,,,,
+K. Logic layer,FUNCTION,kuber.fn_payment_360,(p_id character varying),json,,,,
+K. Logic layer,FUNCTION,kuber.fn_payment_journey,(p_id character varying),"TABLE(kind text, target numeric, back_idx integer, journey_state text, node_count integer, i_da integer, i_ca integer, where_text text)",,,,
+K. Logic layer,FUNCTION,kuber.fn_payment_lifecycle,(p_id character varying),"TABLE(ord integer, state text, step_class text, ts text, note text)",,,,
+K. Logic layer,FUNCTION,kuber.fn_payment_lineage,(p_id character varying),"TABLE(node_idx integer, node_role text, node_name text, node_sub text, node_state text, status_tag text, msg_to_next text)",,,,
+K. Logic layer,FUNCTION,kuber.fn_project_payment,(p_id character varying),void,,,,
+K. Logic layer,FUNCTION,kuber.fn_render_template,"(tpl text, p_id character varying)",text,,,,
+K. Logic layer,FUNCTION,kuber.fn_route_rail,"(p_amount numeric, p_dest text, p_urgency text, p_timing text)","TABLE(option_code text, eligible boolean, score integer, recommended boolean, reason text, speed_score integer, cost_score integer)",,,,
+K. Logic layer,FUNCTION,kuber.fn_search_payments,"(p_mode text, p_status text[], p_rail text[], p_domain text, p_msg text[], p_ccy text[], p_min numeric, p_max numeric, p_text text[], p_bic text, p_debtor text, p_creditor text, p_customer text, p_address_format text, p_limit integer, p_offset integer)",SETOF kuber.v_payment_current,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_append,"(p_run character varying, p_state text, p_desc text, p_msg text, p_injected boolean, p_wall_ms bigint)",bigint,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_finish,(p_run character varying),void,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_inject_failure,"(p_run character varying, p_wall_ms bigint)",json,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_pause,(p_run character varying),void,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_reset,(p_run character varying),void,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_resume,(p_run character varying),void,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_run_to_end,"(p_payment character varying, p_scenario character varying, p_speed character varying)",character varying,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_start,"(p_payment character varying, p_scenario character varying, p_speed character varying, p_user character varying)",character varying,,,,
+K. Logic layer,FUNCTION,kuber.fn_sim_step,"(p_run character varying, p_wall_ms bigint)",json,,,,
+K. Logic layer,FUNCTION,kuber.fn_step_latency,"(p_id character varying, p_state text, p_idx integer, p_prev text)",bigint,,,,

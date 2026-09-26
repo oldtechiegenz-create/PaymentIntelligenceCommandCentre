@@ -1,0 +1,336 @@
+# =====================================================================
+# KUBER V4 — Agent tool contract for MCP Toolbox for Databases
+# https://github.com/googleapis/mcp-toolbox   (run: toolbox --tools-file tools.yaml)
+#
+# Principles
+#  • Agents never write free-form SQL against the system of record. Every
+#    operational question maps to a parameterised, deterministic tool backed by
+#    the kuber.* semantic functions. Those return exactly what the HTML command
+#    center shows.
+#  • Free-form text-to-SQL is allowed only on BigQuery analytics views.
+#  • The reader source connects as a login role that is a member of
+#    kuber_agent_reader. propose_actions uses a separate writer login in
+#    kuber_agent_writer. Simulation and approval tools are deliberately NOT
+#    exposed to agents: humans run those from the UI.
+# Tool names match kuber.ai_agent.allowed_tools.
+# =====================================================================
+kind: source
+name: kuber-alloydb-reader
+type: alloydb-postgres
+project: ${GCP_PROJECT}
+region: ${GCP_REGION}
+cluster: kuber-cluster
+instance: kuber-primary
+database: kuber
+user: ${KUBER_READER_USER}          # login role GRANTed kuber_agent_reader
+password: ${KUBER_READER_PASSWORD}
+---
+kind: source
+name: kuber-alloydb-writer
+type: alloydb-postgres
+project: ${GCP_PROJECT}
+region: ${GCP_REGION}
+cluster: kuber-cluster
+instance: kuber-primary
+database: kuber
+user: ${KUBER_WRITER_USER}          # login role GRANTed kuber_agent_writer
+password: ${KUBER_WRITER_PASSWORD}
+---
+# Alternative for Cloud SQL / self-managed PostgreSQL:
+# kind: source
+# name: kuber-alloydb-reader
+# type: postgres
+# host: 10.0.0.5
+# port: 5432
+# database: kuber
+# user: ${KUBER_READER_USER}
+# password: ${KUBER_READER_PASSWORD}
+kind: source
+name: kuber-bigquery
+type: bigquery
+project: ${GCP_PROJECT}
+location: US
+---
+kind: tool
+name: get_payment_360
+type: postgres-sql
+source: kuber-alloydb-reader
+description: >
+  Return the complete Payment 360 for one payment as JSON: identity, authoritative state
+  (status, state_label, status_indicator such as 'RJCT · AC03'), journey, lineage nodes,
+  lifecycle events, ISO message chain, parties, banks, hop tracker, operations, readiness
+  checks, evidence with confidence, and proposed actions. Always call this before
+  answering any question about a specific payment. Never describe a payment as completed
+  unless state.status = 'COMPLETED'.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID such as PAY-CB-000001, or a UETR.
+statement: |
+  SELECT kuber.fn_payment_360(coalesce(
+           (SELECT payment_id FROM kuber.v_payment_current WHERE payment_id = $1 OR uetr = $1 LIMIT 1), $1)) AS payment_360;
+---
+kind: tool
+name: kuber_answer
+type: postgres-sql
+source: kuber-alloydb-reader
+description: >
+  Deterministic "gold" Kuber answer for a question about one payment. Routes the intent
+  (risk, liquidity, iso, address, recon, owner, reject, lineage, action, mandate, summary)
+  to the right specialist agent and returns text, evidence dimensions and confidence.
+  Paraphrase it if you like, but never contradict it.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID.
+  - name: question
+    type: string
+    description: The user's question, verbatim.
+  - name: active_agent
+    type: string
+    description: Active agent id (orchestrator, investigator, correspondent, risk, liquidity, recon, iso). Use orchestrator to auto-route.
+statement: SELECT kuber.fn_kuber_answer($1, $2, $3) AS answer;
+---
+kind: tool
+name: search_payments
+type: postgres-sql
+source: kuber-alloydb-reader
+description: >
+  Search the payment universe. Convert natural language to these filters: status words
+  map to COMPLETED/IN_PROGRESS/REJECTED/RETURNED/INVESTIGATION/FAILED/CANCELLED; rails map
+  to 'SWIFT CBPR+', RTP, FedNow, ACH, Fedwire; amounts are in the debit currency ('over 1m'
+  means min_amount 1000000). Pass comma-separated lists, or '' for no filter. Returns at
+  most 50 rows.
+parameters:
+  - name: mode
+    type: string
+    description: Persona scope — ALL, CBCC or DOME.
+  - name: statuses
+    type: string
+    description: Comma-separated statuses, or ''.
+  - name: rails
+    type: string
+    description: Comma-separated rails, or ''.
+  - name: min_amount
+    type: float
+    description: Minimum amount (0 = none).
+  - name: max_amount
+    type: float
+    description: Maximum amount (0 = none).
+  - name: text_terms
+    type: string
+    description: Comma-separated free-text terms (IDs, UETR fragments, names). All must match.
+  - name: bic
+    type: string
+    description: BIC fragment, or ''.
+statement: |
+  SELECT payment_id, uetr, rail, message_type, debtor, creditor, amount, debit_ccy, status, state_label,
+         status_indicator, intermediate_status, status_reason, owner, ai_recommendation
+  FROM kuber.fn_search_payments(
+         p_mode   => coalesce(nullif($1,''),'ALL'),
+         p_status => string_to_array(nullif($2,''), ','),
+         p_rail   => string_to_array(nullif($3,''), ','),
+         p_min    => nullif($4, 0)::numeric,
+         p_max    => nullif($5, 0)::numeric,
+         p_text   => string_to_array(nullif($6,''), ','),
+         p_bic    => nullif($7,''),
+         p_limit  => 50);
+---
+kind: tool
+name: get_payment_timeline
+type: postgres-sql
+source: kuber-alloydb-reader
+description: Chronological lifecycle events of the active stream (baseline or active simulation run), with transition, actor, ISO message, reason and processing time.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID.
+statement: |
+  SELECT seq, state, transition, description, iso_message, actor, reason, event_ts, processing_time, sim_run_id
+  FROM kuber.v_payment_timeline WHERE payment_id = $1 ORDER BY seq;
+---
+kind: tool
+name: get_lineage
+type: postgres-sql
+source: kuber-alloydb-reader
+description: Ordered payment path from Debtor to Debtor Agent, Correspondent, Intermediary, Creditor Agent and (Ultimate) Creditor. Includes each node's state (done/cur/err/warn/ret/pend) and status tag. Correspondent and intermediary appear only when present.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID.
+statement: SELECT * FROM kuber.fn_payment_lineage($1) ORDER BY node_idx;
+---
+kind: tool
+name: get_iso_chain
+type: postgres-sql
+source: kuber-alloydb-reader
+description: The ISO 20022 message chain observed for the payment (e.g. pain.001 → pacs.008 → pacs.002 RJCT → pacs.004) plus the MT↔MX semantic mapping.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID.
+statement: |
+  SELECT kuber.fn_payment_360($1)->'iso_chain' AS iso_chain,
+         (SELECT json_agg(m) FROM kuber.ref_mt_mx_mapping m) AS mt_mx_mapping;
+---
+kind: tool
+name: get_evidence
+type: postgres-sql
+source: kuber-alloydb-reader
+description: The seven evidence dimensions (IDENTITY, ISO, LINEAGE, STATE, RISK, LIQUIDITY, OWNER) with presence flags, confidence and completeness %.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID.
+statement: |
+  SELECT e.*, c.confidence, c.completeness_pct
+  FROM kuber.fn_kuber_evidence($1) e CROSS JOIN kuber.fn_kuber_confidence($1) c ORDER BY e.sort_order;
+---
+kind: tool
+name: get_proposed_actions
+type: postgres-sql
+source: kuber-alloydb-reader
+description: Rule-based next-best actions for the payment's current state, with the latest human decision if one exists. These are proposals only.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID.
+statement: SELECT * FROM kuber.fn_kuber_actions($1);
+---
+kind: tool
+name: propose_actions
+type: postgres-sql
+source: kuber-alloydb-writer
+description: >
+  Record the current rule-based actions as PROPOSED for human review. This does NOT
+  execute anything: external execution is impossible by design (CHECK constraint), and
+  only a HUMAN principal can approve.
+parameters:
+  - name: payment_id
+    type: string
+    description: Payment ID.
+  - name: agent_id
+    type: string
+    description: Proposing agent id.
+statement: SELECT kuber.fn_kuber_propose_actions($1, $2) AS actions_proposed;
+---
+kind: tool
+name: lookup_field
+type: postgres-sql
+source: kuber-alloydb-reader
+description: Resolve a business term (e.g. 'beneficiary', 'method of payment', 'UETR') to its catalogue field, description, ISO path hint and the column to query in kuber.v_payment_current.
+parameters:
+  - name: term
+    type: string
+    description: Business term.
+statement: |
+  SELECT field_id, display_name, category_name, domain_code, data_type, description, example, source_view, source_column, iso_path_hint, synonyms
+  FROM kuber.field_catalogue
+  WHERE display_name ILIKE '%' || $1 || '%' OR field_id ILIKE '%' || $1 || '%' OR $1 ILIKE ANY (synonyms) OR description ILIKE '%' || $1 || '%'
+  LIMIT 10;
+---
+kind: tool
+name: get_mandates
+type: postgres-sql
+source: kuber-alloydb-reader
+description: Mandates / obligations with due time, linked payment, stored and live Kuber readiness.
+parameters: []
+statement: SELECT * FROM kuber.v_mandate_readiness;
+---
+kind: tool
+name: route_rail
+type: postgres-sql
+source: kuber-alloydb-reader
+description: Smart Rail Router. Ranks rails by eligibility (network limits, operating hours), speed and cost for an amount in USD.
+parameters:
+  - name: amount_usd
+    type: float
+    description: Amount in USD.
+  - name: destination
+    type: string
+    description: DOM or XB.
+  - name: urgency
+    type: string
+    description: INSTANT, SAMEDAY or NEXT.
+  - name: timing
+    type: string
+    description: BH (business hours) or OFF (evening/weekend).
+statement: SELECT * FROM kuber.fn_route_rail($1::numeric, $2, $3, $4);
+---
+kind: tool
+name: search_knowledge
+type: postgres-sql
+source: kuber-alloydb-reader
+description: Keyword search over ISO guidelines, scheme rules and runbooks. With pgvector/AlloyDB AI, replace this with an embedding similarity query on knowledge_chunk.embedding.
+parameters:
+  - name: query
+    type: string
+    description: Keywords.
+statement: |
+  SELECT d.title, d.doc_type, d.source_uri, c.chunk_no, left(c.content, 800) AS content
+  FROM kuber.knowledge_chunk c JOIN kuber.knowledge_document d USING (doc_id)
+  WHERE c.content ILIKE '%' || $1 || '%' OR d.title ILIKE '%' || $1 || '%' LIMIT 5;
+---
+kind: tool
+name: get_exec_radar
+type: bigquery-sql
+source: kuber-bigquery
+description: Executive Payment Radar KPIs and 7-day trend from BigQuery (payment value, payments, STP, success, exceptions, latency, AI cases).
+parameters:
+  - name: business_date
+    type: string
+    description: Business date YYYY-MM-DD (the radar shows T-1).
+statement: |
+  SELECT k.kpi_code, k.label, k.display_value, k.delta_text,
+         (SELECT ARRAY_AGG(STRUCT(t.business_date, t.payment_count, t.payment_value_usd) ORDER BY t.business_date)
+            FROM `kuber_analytics.exec_trend_daily` t
+           WHERE t.business_date BETWEEN DATE_SUB(DATE(@business_date), INTERVAL 6 DAY) AND DATE(@business_date)) AS trend
+  FROM `kuber_analytics.exec_kpi_daily` k
+  WHERE k.business_date = DATE(@business_date)
+  ORDER BY k.sort_order;
+---
+kind: tool
+name: exceptions_by_reason
+type: bigquery-sql
+source: kuber-bigquery
+description: Exception cases and value by rail, status and ISO reason code over a date range (analytics).
+parameters:
+  - name: from_date
+    type: string
+    description: YYYY-MM-DD
+  - name: to_date
+    type: string
+    description: YYYY-MM-DD
+statement: |
+  SELECT rail, status, reason_code, exception_type, SUM(cases) AS cases, SUM(value_usd) AS value_usd
+  FROM `kuber_analytics.v_exceptions_by_reason`
+  WHERE business_date BETWEEN DATE(@from_date) AND DATE(@to_date)
+  GROUP BY 1, 2, 3, 4 ORDER BY cases DESC LIMIT 50;
+---
+kind: toolset
+name: orchestrator
+tools: [get_payment_360, search_payments, kuber_answer, get_evidence, get_proposed_actions, propose_actions, get_exec_radar, lookup_field]
+---
+kind: toolset
+name: investigator
+tools: [get_payment_360, get_payment_timeline, kuber_answer, get_evidence, propose_actions, exceptions_by_reason]
+---
+kind: toolset
+name: correspondent
+tools: [get_payment_360, get_lineage, get_payment_timeline, kuber_answer]
+---
+kind: toolset
+name: risk
+tools: [get_payment_360, kuber_answer, search_payments]
+---
+kind: toolset
+name: liquidity
+tools: [get_payment_360, get_mandates, kuber_answer, get_exec_radar, route_rail]
+---
+kind: toolset
+name: recon
+tools: [get_payment_360, kuber_answer, search_payments]
+---
+kind: toolset
+name: iso
+tools: [get_payment_360, get_iso_chain, kuber_answer, lookup_field, search_knowledge]
