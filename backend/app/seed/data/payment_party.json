@@ -1,0 +1,2712 @@
+[
+ {
+  "payment_id": "PAY-CB-000001",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "US64CHAS000118420000",
+  "country_code": "CH",
+  "address_format": "STRUCTURED",
+  "town_name": "Zug"
+ },
+ {
+  "payment_id": "PAY-CB-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading Holdings AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "CH",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-000001",
+  "party_role": "CREDITOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": "GB29MIDL40051512345678",
+  "country_code": "GB",
+  "address_format": "STRUCTURED",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-CB-000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RETURN-000001",
+  "party_role": "DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": "C-NORTHSTAR-BANK",
+  "account_id": "GB82MIDL40051587654321",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RETURN-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RETURN-000001",
+  "party_role": "CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": "GB33BARC20000055779911",
+  "country_code": "GB",
+  "address_format": "STRUCTURED",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "party_role": "DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": "C-ACME-MANUFACTURING",
+  "account_id": "US12BOFA000082000001",
+  "country_code": "US",
+  "address_format": "HYBRID",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Acme Global Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "party_role": "CREDITOR",
+  "party_name": "Acme UK Ltd",
+  "customer_id": null,
+  "account_id": "GB94MIDL40051599887766",
+  "country_code": "GB",
+  "address_format": "HYBRID",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Acme UK Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-SCREEN-000001",
+  "party_role": "DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": "C-ORION-CAPITAL",
+  "account_id": "GB11MIDL40051533221100",
+  "country_code": "US",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-SCREEN-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Orion Manufacturing Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-SCREEN-000001",
+  "party_role": "CREDITOR",
+  "party_name": "Orion UK Ltd",
+  "customer_id": null,
+  "account_id": "GB61BARC20000012345699",
+  "country_code": "GB",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-SCREEN-000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Orion UK Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-000001",
+  "party_role": "DEBTOR",
+  "party_name": "US Retail Corp",
+  "customer_id": "C-US-RETAIL-CORP",
+  "account_id": "021000322-4410029",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "US Retail Corp",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-000001",
+  "party_role": "CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": "121000248-5530091",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-000001",
+  "party_role": "DEBTOR",
+  "party_name": "Northstar Services",
+  "customer_id": "C-NORTHSTAR-SERVICES",
+  "account_id": "121000248-0098812",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Northstar Services",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-000001",
+  "party_role": "CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": "026009593-7712003",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-000001",
+  "party_role": "DEBTOR",
+  "party_name": "Metro Services Inc",
+  "customer_id": "C-METRO-SERVICES-INC",
+  "account_id": "021000021-3310448",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Metro Services Inc",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-000001",
+  "party_role": "CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": "043000096-1102297",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-000001",
+  "party_role": "DEBTOR",
+  "party_name": "Treasury Services Inc",
+  "customer_id": "C-TREASURY-SERVICES-INC",
+  "account_id": "026009593",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Treasury Services Inc",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-000001",
+  "party_role": "CREDITOR",
+  "party_name": "Corporate Treasury LLC",
+  "customer_id": null,
+  "account_id": "021000089",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Corporate Treasury LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000001",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "0307960341-5201913",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000001",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000001",
+  "party_role": "CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": "0460962943-8722297",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000001",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000002",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "US12BOFA457761722616",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000002",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000002",
+  "party_role": "CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": "FR52BNPA21134862629696",
+  "country_code": "FR",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000002",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "FR",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "party_role": "DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": "C-CRESCENT-BANK",
+  "account_id": "US47BOFA792753145564",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "party_role": "CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": "CH82UBSW34154862770810",
+  "country_code": "CH",
+  "address_format": "STRUCTURED",
+  "town_name": "Zug"
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "CH",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000004",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "0671374088-1294332",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000004",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000004",
+  "party_role": "CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": "0327908514-2821156",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000004",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000005",
+  "party_role": "DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": "C-NOVA-RETAIL",
+  "account_id": "US72CHAS486819902667",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000005",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000005",
+  "party_role": "CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": "SG57SCBL81547956424765",
+  "country_code": "SG",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000005",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "SG",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000006",
+  "party_role": "DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": "C-NOVA-RETAIL",
+  "account_id": "0550256444-6401466",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000006",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000006",
+  "party_role": "CREDITOR",
+  "party_name": "Lion City Foods Pte",
+  "customer_id": null,
+  "account_id": "0580184558-2951171",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000006",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Lion City Foods Pte",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000007",
+  "party_role": "DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": "C-CRESCENT-BANK",
+  "account_id": "0835422945-4550094",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000007",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000007",
+  "party_role": "CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": "0620455695-1350290",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000007",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000008",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "US33CITI537796418881",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000008",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000008",
+  "party_role": "CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": "CA66ROYC26459741522558",
+  "country_code": "CA",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000008",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "CA",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000009",
+  "party_role": "DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": "C-VERTEX-COMPONENTS",
+  "account_id": "0596865883-7243367",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000009",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Vertex Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000009",
+  "party_role": "CREDITOR",
+  "party_name": "Indus Textiles Pvt Ltd",
+  "customer_id": null,
+  "account_id": "0526451381-6077621",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000009",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Indus Textiles Pvt Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000010",
+  "party_role": "DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": "C-VERTEX-COMPONENTS",
+  "account_id": "0545681715-2153460",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000010",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000010",
+  "party_role": "CREDITOR",
+  "party_name": "Indus Textiles Pvt Ltd",
+  "customer_id": null,
+  "account_id": "0496898551-3535703",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000010",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Indus Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000011",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "0800261020-5979401",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000011",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000011",
+  "party_role": "CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": "0415974468-7137906",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000011",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000012",
+  "party_role": "DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": "C-ACME-MANUFACTURING",
+  "account_id": "0776354271-6200383",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000012",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Acme Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000012",
+  "party_role": "CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": "0542635007-1306672",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000012",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000013",
+  "party_role": "DEBTOR",
+  "party_name": "Mercury Trading",
+  "customer_id": "C-MERCURY-TRADING",
+  "account_id": "US63CITI852509795688",
+  "country_code": "US",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000013",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Mercury Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000013",
+  "party_role": "CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": "JP15BOTK21801819768734",
+  "country_code": "JP",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000013",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "JP",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "US33BOFA723313189810",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "party_role": "CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": "CA81ROYC75438701780512",
+  "country_code": "CA",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "CA",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "party_role": "DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": "C-ACME-MANUFACTURING",
+  "account_id": "US69CHAS754475036868",
+  "country_code": "US",
+  "address_format": "HYBRID",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "party_role": "CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": "GB72MIDL60066667525097",
+  "country_code": "GB",
+  "address_format": "HYBRID",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vertex Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000016",
+  "party_role": "DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": "C-CRESCENT-BANK",
+  "account_id": "US58CITI142557748127",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000016",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Crescent Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000016",
+  "party_role": "CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": "GB61BARC56610569125041",
+  "country_code": "GB",
+  "address_format": "STRUCTURED",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-CB-G000016",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vendor Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000017",
+  "party_role": "DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": "C-CRESCENT-BANK",
+  "account_id": "0785606134-2745967",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000017",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Crescent Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000017",
+  "party_role": "CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": "0416527220-8109519",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000017",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000018",
+  "party_role": "DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": "C-NOVA-RETAIL",
+  "account_id": "0806458612-1574648",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000018",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000018",
+  "party_role": "CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": "0549319237-8258919",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000018",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000019",
+  "party_role": "DEBTOR",
+  "party_name": "Atlas Manufacturing",
+  "customer_id": "C-ATLAS-MANUFACTURING",
+  "account_id": "0318954686-4587899",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000019",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Atlas Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000019",
+  "party_role": "CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": "0555641602-6453489",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000019",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000020",
+  "party_role": "DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": "C-ORION-CAPITAL",
+  "account_id": "0309739283-7311890",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000020",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000020",
+  "party_role": "CREDITOR",
+  "party_name": "Sakura Components KK",
+  "customer_id": null,
+  "account_id": "0734486846-6539666",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000020",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Sakura Components KK",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000021",
+  "party_role": "DEBTOR",
+  "party_name": "BluePeak Foods",
+  "customer_id": "C-BLUEPEAK-FOODS",
+  "account_id": "0307009587-4436485",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000021",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "BluePeak Foods",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000021",
+  "party_role": "CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": "0283992636-6782719",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000021",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000022",
+  "party_role": "DEBTOR",
+  "party_name": "Mercury Trading",
+  "customer_id": "C-MERCURY-TRADING",
+  "account_id": "US96CITI596560471924",
+  "country_code": "US",
+  "address_format": "HYBRID",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000022",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Mercury Trading",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000022",
+  "party_role": "CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": "GB49MIDL80220315884798",
+  "country_code": "GB",
+  "address_format": "HYBRID",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-CB-G000022",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000023",
+  "party_role": "DEBTOR",
+  "party_name": "Atlas Manufacturing",
+  "customer_id": "C-ATLAS-MANUFACTURING",
+  "account_id": "0864546314-8962237",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000023",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Atlas Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000023",
+  "party_role": "CREDITOR",
+  "party_name": "Maple Freight Inc",
+  "customer_id": null,
+  "account_id": "0614312440-6605953",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000023",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Maple Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000024",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "0721131493-8459044",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000024",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000024",
+  "party_role": "CREDITOR",
+  "party_name": "Sakura Components KK",
+  "customer_id": null,
+  "account_id": "0785101734-5024377",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000024",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Sakura Components KK",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000025",
+  "party_role": "DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": "C-ACME-MANUFACTURING",
+  "account_id": "0271320920-2005474",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000025",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000025",
+  "party_role": "CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": "0749580996-8982046",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000025",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Metro Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000026",
+  "party_role": "DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": "C-ACME-MANUFACTURING",
+  "account_id": "0424974994-1739150",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000026",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000026",
+  "party_role": "CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": "0261212002-8014903",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000026",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000027",
+  "party_role": "DEBTOR",
+  "party_name": "Atlas Manufacturing",
+  "customer_id": "C-ATLAS-MANUFACTURING",
+  "account_id": "0873479305-1403798",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000027",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Atlas Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000027",
+  "party_role": "CREDITOR",
+  "party_name": "Lion City Foods Pte",
+  "customer_id": null,
+  "account_id": "0804820887-3815634",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000027",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Lion City Foods Pte",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000028",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "0541848198-5867942",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000028",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000028",
+  "party_role": "CREDITOR",
+  "party_name": "Corporate Treasury LLC",
+  "customer_id": null,
+  "account_id": "0303938586-1036944",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000028",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Corporate Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000029",
+  "party_role": "DEBTOR",
+  "party_name": "BluePeak Foods",
+  "customer_id": "C-BLUEPEAK-FOODS",
+  "account_id": "US73BOFA856797280022",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000029",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "BluePeak Foods",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000029",
+  "party_role": "CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": "JP20BOTK44291771785356",
+  "country_code": "JP",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000029",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "JP",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000030",
+  "party_role": "DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": "C-NOVA-RETAIL",
+  "account_id": "0295520769-5477433",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000030",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000030",
+  "party_role": "CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": "0743024295-5728325",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000030",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000031",
+  "party_role": "DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": "C-NOVA-RETAIL",
+  "account_id": "0371227005-2264640",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000031",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000031",
+  "party_role": "CREDITOR",
+  "party_name": "Maple Freight Inc",
+  "customer_id": null,
+  "account_id": "0500328217-7035230",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000031",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Maple Freight Inc",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000032",
+  "party_role": "DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": "C-NOVA-RETAIL",
+  "account_id": "0222476522-6022042",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000032",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Nova Retail",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000032",
+  "party_role": "CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": "0541938081-7054984",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000032",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000033",
+  "party_role": "DEBTOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": "C-ACME-MANUFACTURING",
+  "account_id": "0687604331-2251680",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000033",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Acme Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000033",
+  "party_role": "CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": "0577140701-5841355",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000033",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vertex Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000034",
+  "party_role": "DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": "C-NORTHSTAR-BANK",
+  "account_id": "US95CITI991712712682",
+  "country_code": "US",
+  "address_format": "HYBRID",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000034",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000034",
+  "party_role": "CREDITOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": "DE38DEUT93811101210303",
+  "country_code": "DE",
+  "address_format": "HYBRID",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000034",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "DE",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000035",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "0550782407-2462899",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000035",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000035",
+  "party_role": "CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": "0216989582-6864584",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000035",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000036",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "0826511258-4191249",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000036",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000036",
+  "party_role": "CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": "0529692448-3594470",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000036",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "party_role": "DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": "C-VERTEX-COMPONENTS",
+  "account_id": "US53BOFA067344317445",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "party_role": "CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": "GB33MIDL27235985966399",
+  "country_code": "GB",
+  "address_format": "STRUCTURED",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vendor Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000038",
+  "party_role": "DEBTOR",
+  "party_name": "Apex Energy",
+  "customer_id": "C-APEX-ENERGY",
+  "account_id": "0268098554-1011087",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000038",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Apex Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000038",
+  "party_role": "CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": "0351574627-3501521",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000038",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "US97MIDL013218772597",
+  "country_code": "US",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "party_role": "CREDITOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": "DE13DEUT66552687902003",
+  "country_code": "DE",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "DE",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000040",
+  "party_role": "DEBTOR",
+  "party_name": "Summit Logistics",
+  "customer_id": "C-SUMMIT-LOGISTICS",
+  "account_id": "0600783955-2969427",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000040",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Summit Logistics",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000040",
+  "party_role": "CREDITOR",
+  "party_name": "Harbor Metals GmbH",
+  "customer_id": null,
+  "account_id": "0882919064-3304476",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000040",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Harbor Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "party_role": "DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": "C-ORION-CAPITAL",
+  "account_id": "US27BOFA563822303665",
+  "country_code": "US",
+  "address_format": "HYBRID",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Orion Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "party_role": "CREDITOR",
+  "party_name": "Maple Freight Inc",
+  "customer_id": null,
+  "account_id": "CA72ROYC92562429467216",
+  "country_code": "CA",
+  "address_format": "HYBRID",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Maple Freight Inc",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "CA",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "party_role": "DEBTOR",
+  "party_name": "BluePeak Foods",
+  "customer_id": "C-BLUEPEAK-FOODS",
+  "account_id": "US73MIDL310436593601",
+  "country_code": "US",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "BluePeak Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "party_role": "CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": "SG46SCBL98158674198202",
+  "country_code": "SG",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Kestrel Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "SG",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000043",
+  "party_role": "DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": "C-NORTHSTAR-BANK",
+  "account_id": "US69CITI197558410931",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000043",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000043",
+  "party_role": "CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": "FR79BNPA56031433329917",
+  "country_code": "FR",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000043",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "FR",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000044",
+  "party_role": "DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": "C-VERTEX-COMPONENTS",
+  "account_id": "0880287788-7461098",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000044",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000044",
+  "party_role": "CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": "0721671960-2412245",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000044",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000045",
+  "party_role": "DEBTOR",
+  "party_name": "Atlas Manufacturing",
+  "customer_id": "C-ATLAS-MANUFACTURING",
+  "account_id": "0457449517-6600613",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000045",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Atlas Manufacturing",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000045",
+  "party_role": "CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": "0803224859-8460623",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000045",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000046",
+  "party_role": "DEBTOR",
+  "party_name": "Apex Energy",
+  "customer_id": "C-APEX-ENERGY",
+  "account_id": "0825930718-6111709",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000046",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Apex Energy",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000046",
+  "party_role": "CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": "0374627334-2764619",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000046",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Alpine Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "party_role": "DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": "C-ORION-CAPITAL",
+  "account_id": "US82CHAS072015514364",
+  "country_code": "US",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "party_role": "CREDITOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": "GB71MIDL13940647151321",
+  "country_code": "GB",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Acme Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000048",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "0213573930-1221981",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000048",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000048",
+  "party_role": "CREDITOR",
+  "party_name": "Alpine Precision AG",
+  "customer_id": null,
+  "account_id": "0332703802-7513122",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000048",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Alpine Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000049",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "0756221886-4790381",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000049",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000049",
+  "party_role": "CREDITOR",
+  "party_name": "Acme Manufacturing",
+  "customer_id": null,
+  "account_id": "0240307224-2350692",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000049",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Acme Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000050",
+  "party_role": "DEBTOR",
+  "party_name": "Mercury Trading",
+  "customer_id": "C-MERCURY-TRADING",
+  "account_id": "0821500038-3560569",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000050",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Mercury Trading",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000050",
+  "party_role": "CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": "0818255453-5683940",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000050",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vendor Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000051",
+  "party_role": "DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": "C-ORION-CAPITAL",
+  "account_id": "0659170957-2134213",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000051",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Orion Capital",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000051",
+  "party_role": "CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": "0258724426-8532213",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000051",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Rivi\u00e8re Pharma SA",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000052",
+  "party_role": "DEBTOR",
+  "party_name": "Vertex Components",
+  "customer_id": "C-VERTEX-COMPONENTS",
+  "account_id": "US64BOFA709987982641",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000052",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Vertex Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000052",
+  "party_role": "CREDITOR",
+  "party_name": "Corporate Treasury LLC",
+  "customer_id": null,
+  "account_id": "FR46BNPA48419749806635",
+  "country_code": "FR",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000052",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Corporate Treasury LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "FR",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000053",
+  "party_role": "DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": "C-NORTHSTAR-BANK",
+  "account_id": "US46MIDL916058410424",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000053",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000053",
+  "party_role": "CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": "CH91UBSW70709505281411",
+  "country_code": "CH",
+  "address_format": "STRUCTURED",
+  "town_name": "Zug"
+ },
+ {
+  "payment_id": "PAY-CB-G000053",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Supplier LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "CH",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000054",
+  "party_role": "DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": "C-CRESCENT-BANK",
+  "account_id": "0491948973-3861538",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000054",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000054",
+  "party_role": "CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": "0668567911-3678707",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000054",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vertex Components",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000055",
+  "party_role": "DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": "C-CRESCENT-BANK",
+  "account_id": "0524325258-2891806",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000055",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Crescent Bank",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000055",
+  "party_role": "CREDITOR",
+  "party_name": "Lion City Foods Pte",
+  "customer_id": null,
+  "account_id": "0640589073-3952239",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000055",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Lion Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000056",
+  "party_role": "DEBTOR",
+  "party_name": "Northstar Bank",
+  "customer_id": "C-NORTHSTAR-BANK",
+  "account_id": "0581418302-1831607",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000056",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Northstar Holdings",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-ACH-G000056",
+  "party_role": "CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": "0743308900-5391365",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-ACH-G000056",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000057",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "0769240708-6705531",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000057",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-RTP-G000057",
+  "party_role": "CREDITOR",
+  "party_name": "Kestrel Logistics Ltd",
+  "customer_id": null,
+  "account_id": "0466808865-8896956",
+  "country_code": "US",
+  "address_format": null,
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-RTP-G000057",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Kestrel Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000058",
+  "party_role": "DEBTOR",
+  "party_name": "BluePeak Foods",
+  "customer_id": "C-BLUEPEAK-FOODS",
+  "account_id": "US61MIDL688281705835",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000058",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "BluePeak Foods",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000058",
+  "party_role": "CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": "GB11BARC92264215508475",
+  "country_code": "GB",
+  "address_format": "STRUCTURED",
+  "town_name": "London"
+ },
+ {
+  "payment_id": "PAY-CB-G000058",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Vendor Services LLC",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "party_role": "DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": "C-GLOBAL-TRADING-AG",
+  "account_id": "US70CITI469419499393",
+  "country_code": "US",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "Global Trading AG",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "party_role": "CREDITOR",
+  "party_name": "Indus Textiles Pvt Ltd",
+  "customer_id": null,
+  "account_id": "GB59BARC31275669159367",
+  "country_code": "GB",
+  "address_format": "UNSTRUCTURED",
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Indus Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "GB",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000060",
+  "party_role": "DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": "C-HSBC-TREASURY-LTD",
+  "account_id": "US24MIDL801888193935",
+  "country_code": "US",
+  "address_format": "STRUCTURED",
+  "town_name": "New York"
+ },
+ {
+  "payment_id": "PAY-CB-G000060",
+  "party_role": "ULTIMATE_DEBTOR",
+  "party_name": "HSBC Treasury Ltd",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "US",
+  "address_format": null,
+  "town_name": null
+ },
+ {
+  "payment_id": "PAY-CB-G000060",
+  "party_role": "CREDITOR",
+  "party_name": "Metro Supplier LLC",
+  "customer_id": null,
+  "account_id": "SG71SCBL12200072640553",
+  "country_code": "SG",
+  "address_format": "STRUCTURED",
+  "town_name": "City"
+ },
+ {
+  "payment_id": "PAY-CB-G000060",
+  "party_role": "ULTIMATE_CREDITOR",
+  "party_name": "Metro Group",
+  "customer_id": null,
+  "account_id": null,
+  "country_code": "SG",
+  "address_format": null,
+  "town_name": null
+ }
+]

@@ -1,0 +1,47 @@
+[
+ {
+  "investigation_id": "INV-90231",
+  "payment_id": "PAY-CB-000001",
+  "case_type": "OTHER",
+  "status": "OPEN",
+  "assignee_bic": "CITIUS33",
+  "owner_user_id": "u.mpatel",
+  "opened_at": "2026-09-24 09:42:11"
+ },
+ {
+  "investigation_id": "INV-90244",
+  "payment_id": "PAY-RETURN-000001",
+  "case_type": "RETURN",
+  "status": "OPEN",
+  "assignee_bic": "CHASUS33",
+  "owner_user_id": "u.rokafor",
+  "opened_at": "2026-09-24 11:05:37"
+ },
+ {
+  "investigation_id": "INV-90251",
+  "payment_id": "PAY-TIMEOUT-000001",
+  "case_type": "CORRESPONDENT_CHASE",
+  "status": "OPEN",
+  "assignee_bic": "CITIUS33",
+  "owner_user_id": "u.achen",
+  "opened_at": "2026-09-24 12:02:00"
+ },
+ {
+  "investigation_id": "INV-90262",
+  "payment_id": "PAY-SCREEN-000001",
+  "case_type": "SCREENING_REVIEW",
+  "status": "RESOLVED",
+  "assignee_bic": "CHASUS33",
+  "owner_user_id": "u.siyer",
+  "opened_at": "2026-09-24 14:03:00"
+ },
+ {
+  "investigation_id": "INV-91052",
+  "payment_id": "PAY-CB-G000052",
+  "case_type": "RETURN",
+  "status": "OPEN",
+  "assignee_bic": "CHASUS33",
+  "owner_user_id": "u.mpatel",
+  "opened_at": "2026-09-24 15:02:01"
+ }
+]

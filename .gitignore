@@ -1,0 +1,24 @@
+.DS_Store
+Archive.zip
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# Archives
+Archive.zip
+
+# Node
+node_modules/

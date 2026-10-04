@@ -1,0 +1,1040 @@
+[
+ {
+  "payment_id": "PAY-CB-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-000001",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-000001",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-000001",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-RETURN-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-RETURN-000001",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-RETURN-000001",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BARCGB22"
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-TIMEOUT-000001",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-SCREEN-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-SCREEN-000001",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-SCREEN-000001",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BARCGB22"
+ },
+ {
+  "payment_id": "PAY-RTP-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-RTP-000001",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-ACH-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-ACH-000001",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-000001",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-000001",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000001",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000001",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000002",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000002",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000002",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BNPAFRPP"
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "SCBLSGSG"
+ },
+ {
+  "payment_id": "PAY-CB-G000003",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "UBSWCHZH"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000004",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000004",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-CB-G000005",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000005",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000005",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "SCBLSGSG"
+ },
+ {
+  "payment_id": "PAY-ACH-G000006",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000006",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000007",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-RTP-G000007",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000008",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000008",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000008",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "ROYCCAT2"
+ },
+ {
+  "payment_id": "PAY-RTP-G000009",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-RTP-G000009",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000010",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000010",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-ACH-G000011",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000011",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000012",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-RTP-G000012",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000013",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000013",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000013",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOTKJPJT"
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "SCBLSGSG"
+ },
+ {
+  "payment_id": "PAY-CB-G000014",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "ROYCCAT2"
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "BNPAFRPP"
+ },
+ {
+  "payment_id": "PAY-CB-G000015",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000016",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000016",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000016",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BARCGB22"
+ },
+ {
+  "payment_id": "PAY-RTP-G000017",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000017",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000018",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000018",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000019",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000019",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-ACH-G000020",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000020",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000021",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000021",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000022",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000022",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000022",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-RTP-G000023",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000023",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-ACH-G000024",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-ACH-G000024",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-ACH-G000025",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-ACH-G000025",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000026",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000026",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-RTP-G000027",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000027",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-RTP-G000028",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-RTP-G000028",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000029",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000029",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000029",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOTKJPJT"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000030",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000030",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-RTP-G000031",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000031",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000032",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000032",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-ACH-G000033",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000033",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000034",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000034",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000034",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-ACH-G000035",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000035",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-ACH-G000036",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000036",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "BNPAFRPP"
+ },
+ {
+  "payment_id": "PAY-CB-G000037",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-RTP-G000038",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-RTP-G000038",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "SCBLSGSG"
+ },
+ {
+  "payment_id": "PAY-CB-G000039",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-ACH-G000040",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000040",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "SCBLSGSG"
+ },
+ {
+  "payment_id": "PAY-CB-G000041",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "ROYCCAT2"
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000042",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "SCBLSGSG"
+ },
+ {
+  "payment_id": "PAY-CB-G000043",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000043",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000043",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BNPAFRPP"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000044",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000044",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000045",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000045",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000046",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000046",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000047",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-RTP-G000048",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000048",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-ACH-G000049",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-ACH-G000049",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000050",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000050",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000051",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-FEDWIRE-G000051",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000052",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "BOFAUS3N"
+ },
+ {
+  "payment_id": "PAY-CB-G000052",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000052",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BNPAFRPP"
+ },
+ {
+  "payment_id": "PAY-CB-G000053",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000053",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000053",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "UBSWCHZH"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000054",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-FEDNOW-G000054",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000055",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-RTP-G000055",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000056",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "PNCCUS33"
+ },
+ {
+  "payment_id": "PAY-ACH-G000056",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-RTP-G000057",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "WFBIUS6S"
+ },
+ {
+  "payment_id": "PAY-RTP-G000057",
+  "hop_seq": 2,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000058",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000058",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000058",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BARCGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CHASUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "hop_seq": 3,
+  "agent_role": "INTERMEDIARY",
+  "bic": "DEUTDEFF"
+ },
+ {
+  "payment_id": "PAY-CB-G000059",
+  "hop_seq": 4,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "BARCGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000060",
+  "hop_seq": 1,
+  "agent_role": "DEBTOR_AGENT",
+  "bic": "MIDLGB22"
+ },
+ {
+  "payment_id": "PAY-CB-G000060",
+  "hop_seq": 2,
+  "agent_role": "CORRESPONDENT",
+  "bic": "CITIUS33"
+ },
+ {
+  "payment_id": "PAY-CB-G000060",
+  "hop_seq": 3,
+  "agent_role": "CREDITOR_AGENT",
+  "bic": "SCBLSGSG"
+ }
+]
